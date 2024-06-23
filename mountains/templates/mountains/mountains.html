@@ -1,0 +1,13 @@
+<html>
+<body>
+
+<h1>Mountains</h1>
+  
+<ul>
+  {% for x in mymountains %}
+    <li><a href="forecast/{{x.name}}">{{ x.name }}</li>
+  {% endfor %}
+</ul>
+
+</body>
+</html>
