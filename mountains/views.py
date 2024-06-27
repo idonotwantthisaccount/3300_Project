@@ -42,4 +42,4 @@ def forecast(response, name):
     
     #print(weather)
     return render(response, "mountains/forecast.html", {'mymountain':mymountain, 'Temp':Temp,
-    'UV':UV, 'Visibility':Visibility, 'Precipitation':Precipitation, 'hour':hour})
+    'UV':UV, 'Visibility':Visibility, 'Precipitation':Precipitation})
