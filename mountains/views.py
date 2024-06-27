@@ -30,15 +30,16 @@ def forecast(response, name):
              '&current=temperature_2m&hourly=precipitation,visibility,uv_index&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FDenver&forecast_days=1').read()
     
     data_list = json.loads(weather_data)
+    
     hour = datetime.datetime.now().hour
 
 
     Temp = str(data_list['current']['temperature_2m']) + 'F'
+    Precipitation = str(data_list['hourly']['precipitation'][hour])
+    Visibility = str(data_list['hourly']['visibility'][hour])
     #Base = str(data_list['hourly']['snow_depth'][hour])
     UV = str(data_list['hourly']['uv_index'][hour])
-    Visibility = str(data_list['hourly']['visibility'][hour])
-    Precipitation = str(data_list['hourly']['precipitation'][hour])
     
     #print(weather)
     return render(response, "mountains/forecast.html", {'mymountain':mymountain, 'Temp':Temp,
-    'UV':UV, 'Visibility':Visibility, 'Precipitation':Precipitation})
+    'UV':UV, 'Visibility':Visibility, 'Precipitation':Precipitation, 'hour':hour})

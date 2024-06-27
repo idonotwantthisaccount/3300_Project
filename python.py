@@ -16,14 +16,17 @@ data_list = json.loads(weather_data)
 hour = datetime.datetime.now().hour
 
 print(hour)
-weather = {
-        "Temp": str(data_list['hourly']['temperature_2m'][hour]),
-        #"Base": str(data_list['snow_depth']['5']),
-        #"UV": str(data_list['uv_index'][5]),
-        #"Precipitation": str(data_list['precipitation'][5]),
-    }
+    
+Temp = str(data_list['hourly']['temperature_2m']) + 'F'
+#Base = str(data_list['hourly']['snow_depth'][hour])
+UV = str(data_list['hourly']['uv_index'][hour])
+Visibility = str(data_list['hourly']['visibility'][hour])
+Precipitation = str(data_list['hourly']['precipitation'][hour])
 
 #print(data_list)
-print(weather)
+print(Temp)
+print(UV)
+print(Visibility)
+print(Precipitation)
 
 #print(data_list.keys())
