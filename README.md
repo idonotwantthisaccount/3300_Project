@@ -40,8 +40,10 @@ python -m venv env
 
 pip install django
 
-<<6. Run the Django Development Server>>
+## 6. Run the Django Development Server
 •	Start the Django development server with:
 
 python manage.py runserver
 
+## 7. Go to the Given URL
+•	Should be http://localhost:8000/ or similar. 
