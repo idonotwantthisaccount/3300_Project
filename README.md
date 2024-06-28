@@ -13,9 +13,6 @@ Adaptations to the data were made as follows: [describe any modifications made, 
 
 The original data can be accessed at <https://open-meteo.com/>.
 
-# 3300_Project
-Semester Project for 3300 Summer Class
-
 # How to run our software on a Windows device
 ## 1. Open Command Prompt
 •	Press Win + R, type cmd, and press Enter.
