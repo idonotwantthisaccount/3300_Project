@@ -1,11 +1,50 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountains</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #343a40;
+        }
+        .mountain-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .mountain-list li {
+            margin: 10px 0;
+        }
+        .mountain-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .mountain-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
 <body>
 
 <h1>Mountains</h1>
   
-<ul>
+<ul class="mountain-list">
   {% for x in mymountains %}
-    <li><a href="forecast/{{x.name}}">{{ x.name }}</li>
+    <li><a href="forecast/{{x.name}}" class="mountain-button">{{ x.name }}</a></li>
   {% endfor %}
 </ul>
 
