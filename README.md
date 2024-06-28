@@ -16,23 +16,23 @@ The original data can be accessed at <https://open-meteo.com/>.
 # 3300_Project
 Semester Project for 3300 Summer Class
 
-<<How to run our software on a Windows device>>
-<<1. Open Command Prompt>>
+# How to run our software on a Windows device
+## 1. Open Command Prompt
 •	Press Win + R, type cmd, and press Enter.
 
-<<2. Navigate to Your Project Directory>>
+## 2. Navigate to Your Project Directory
 •	Use the cd command to change to the directory where your Django project is located. For example:
 cd path\to\your\project
 
-<<3. Create a Virtual Environment>>
+## 3. Create a Virtual Environment
 •	If you haven't already created a virtual environment, you can do so with the following command (replace “env” with whatever you wish to name your environment):
 python -m venv env
 
-<<4. Activate the Virtual Environment>>
+## 4. Activate the Virtual Environment
 •	Activate the virtual environment with the following command:
 .\env\Scripts\activate
 
-<<5. Install Django>>
+## 5. Install Django
 •	If Django is not already installed in your virtual environment, install it with:
 pip install django
 
