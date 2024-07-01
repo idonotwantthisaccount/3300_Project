@@ -36,17 +36,47 @@
         .mountain-button:hover {
             background-color: #0056b3;
         }
+        .dropdown {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
 <h1>Mountains</h1>
-  
+
+<div class="dropdown">
+    <label for="pass-filter">Filter by pass type: </label>
+    <select id="pass-filter" onchange="filterMountains()">
+        <option value="all">All</option>
+        <option value="epic">Epic Pass</option>
+        <option value="ikon">Ikon Pass</option>
+        <option value="other">Other</option>
+    </select>
+</div>
+
 <ul class="mountain-list">
   {% for x in mymountains %}
-    <li><a href="forecast/{{x.name}}" class="mountain-button">{{ x.name }}</a></li>
+    <li class="mountain-item" data-pass="{{ x.pass_type }}">
+        <a href="forecast/{{x.name}}" class="mountain-button">{{ x.name }}</a>
+    </li>
   {% endfor %}
 </ul>
+
+<script>
+    function filterMountains() {
+        var filter = document.getElementById('pass-filter').value;
+        var mountains = document.getElementsByClassName('mountain-item');
+        
+        for (var i = 0; i < mountains.length; i++) {
+            if (filter === 'all' || mountains[i].getAttribute('data-pass') === filter) {
+                mountains[i].style.display = 'list-item';
+            } else {
+                mountains[i].style.display = 'none';
+            }
+        }
+    }
+</script>
 
 </body>
 </html>
