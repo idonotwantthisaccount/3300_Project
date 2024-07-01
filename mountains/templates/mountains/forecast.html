@@ -7,54 +7,79 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa; /* Light grey background */
+            background-color: #87CEEB; /* Light blue background */
             margin: 0;
             padding: 20px;
+            display: flex;
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+            height: 100vh; /* Full viewport height */
         }
+
         .forecast-container {
             max-width: 600px; /* Adjust as needed */
-            margin: 0 auto; /* Center align horizontally */
             background-color: #fff; /* White background */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
+            text-align: center; /* Center align content within container */
         }
+
         h1 {
             color: #007bff; /* Blue color for the heading */
-            text-align: center; /* Center align heading */
             margin-top: 0; /* Remove default margin for h1 */
         }
+
         p {
             margin-bottom: 10px; /* Space between paragraphs */
         }
+
         .back-link {
-            text-align: center; /* Center align the back link */
             margin-top: 20px; /* Space between content and back link */
         }
-        .back-link a {
-            color: #007bff; /* Blue color for the link */
-            text-decoration: none; /* Remove underline */
-        }
-        .back-link a:hover {
-            text-decoration: underline; /* Underline on hover */
-        }
+
+            .back-link a {
+                color: #007bff; /* Blue color for the link */
+                text-decoration: none; /* Remove underline */
+            }
+
+                .back-link a:hover {
+                    text-decoration: underline; /* Underline on hover */
+                }
     </style>
 </head>
 <body>
 
-<div class="forecast-container">
-    <h1>{{ mymountain.name }} Forecast</h1>
+    <div class="forecast-container">
+        <h1>{{ mymountain.name }} Forecast</h1>
 
-    <p><strong>Current Temperature:</strong> {{ Temp }}</p>
-    <p><strong>Current Base:</strong> {{ Base }}</p>
-    <p><strong>Current UV Index:</strong> {{ UV }}</p>
-    <p><strong>Current Visibility:</strong> {{ Visibility }}</p>
-    <p><strong>Current Precipitation:</strong> {{ Precipitation }}</p>
+        <p><strong>Current Temperature:</strong> {{ Temp }}</p>
+        <p><strong>Current Base:</strong> {{ Base }}</p>
+        <p><strong>Current UV Index:</strong> {{ UV }}</p>
+        <p id="visibility"><strong>Current Visibility:</strong> {{ Visibility }} meters</p>
+        <p><strong>Current Precipitation:</strong> {{ Precipitation }}</p>
 
-    <div class="back-link">
-        <p>Back to <a href="/">Mountains</a></p>
+        <div class="back-link">
+            <p>Back to <a href="/">Mountains</a></p>
+        </div>
     </div>
-</div>
+
+    <script>
+        // Function to convert meters to miles
+        function metersToMiles(meters) {
+            return (meters * 0.000621371).toFixed(2); // Convert meters to miles and round to 2 decimal places
+        }
+
+        // Update visibility in miles
+        window.onload = function() {
+            const visibilityElement = document.getElementById('visibility');
+            if (visibilityElement) {
+                const visibilityValue = parseFloat('{{ Visibility }}'); // Assuming {{ Visibility }} is replaced server-side with a numerical value in meters
+                const visibilityInMiles = metersToMiles(visibilityValue); // Convert visibility from meters to miles
+                visibilityElement.innerHTML = `<strong>Current Visibility:</strong> ${visibilityInMiles} miles`; // Update the HTML content with visibility in miles
+            }
+        };
+    </script>
 
 </body>
 </html>
