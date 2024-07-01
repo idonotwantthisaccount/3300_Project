@@ -17,7 +17,7 @@ from django.shortcuts import render
 from .models import Mountain
 
 def mountains(response):
-    mymountains = Mountain.objects.all().values('name', 'pass_type')
+    mymountains = Mountain.objects.all().order_by('name').values('name', 'pass_type')
     context = { 'mymountains' : mymountains, }
     return render(response, "mountains/mountains.html", {'mymountains' : mymountains})
 
