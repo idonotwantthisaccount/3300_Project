@@ -33,13 +33,14 @@
         .mountain-list {
             list-style-type: none;
             padding: 0;
-            text-align: center; /* Center align the list */
+            text-align: left; /* Left align the list */
         }
         .mountain-list li {
             margin: 10px 0;
         }
         .mountain-button {
-            display: inline-block;
+            display: block; /* Display as block to take full width of parent */
+            width: 100%; /* Equal width for all buttons */
             padding: 10px 20px;
             font-size: 16px;
             color: #fff;
@@ -49,6 +50,7 @@
             text-decoration: none;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            text-align: left; /* Left align text within buttons */
         }
         .mountain-button:hover {
             background-color: #0056b3;
