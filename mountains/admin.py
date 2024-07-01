@@ -7,5 +7,8 @@
 # licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
 # You can view the license at <https://creativecommons.org/licenses/by/4.0/>.
 from django.contrib import admin
+from .models import Mountain
+
+admin.site.register(Mountain)
 
 # Register your models here.
