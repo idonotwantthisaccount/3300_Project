@@ -39,11 +39,11 @@
         }
         .mountain-item {
             width: calc(33.33% - 20px); /* Adjust width to fit three columns */
-            margin: 10px; /* Adjust spacing between items */
+            margin: 10px; /* Adjust spacing around items */
         }
         .mountain-button {
             display: block;
-            width: 100%;
+            width: calc(100% - 20px); /* Adjust width to accommodate margins */
             padding: 10px 20px;
             font-size: 16px;
             color: #fff;
@@ -54,6 +54,8 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             text-align: center; /* Center align text within button */
+            margin-right: 10px; /* Horizontal margin between buttons */
+            margin-bottom: 10px; /* Vertical margin between buttons */
         }
         .mountain-button:hover {
             background-color: #0056b3;
