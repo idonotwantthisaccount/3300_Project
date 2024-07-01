@@ -15,9 +15,20 @@
             align-items: center; /* Center content vertically */
             min-height: 100vh; /* Ensure full viewport height */
         }
+        .container {
+            max-width: 600px; /* Adjust as needed */
+            text-align: center; /* Center align content within container */
+            background-color: #fff; /* White background for container */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
+        }
         h1 {
             color: #343a40;
-            text-align: center; /* Center align the heading */
+            margin-top: 0; /* Remove default margin for h1 */
+        }
+        .dropdown {
+            margin-bottom: 20px;
         }
         .mountain-list {
             list-style-type: none;
@@ -42,33 +53,31 @@
         .mountain-button:hover {
             background-color: #0056b3;
         }
-        .dropdown {
-            margin-bottom: 20px;
-            text-align: center; /* Center align the dropdown */
-        }
     </style>
 </head>
 <body>
 
-<h1>Mountains</h1>
+<div class="container">
+    <h1>Mountains</h1>
 
-<div class="dropdown">
-    <label for="pass-filter">Filter by pass type: </label>
-    <select id="pass-filter" onchange="filterMountains()">
-        <option value="all">All</option>
-        <option value="epic">Epic Pass</option>
-        <option value="ikon">Ikon Pass</option>
-        <option value="other">Other</option>
-    </select>
+    <div class="dropdown">
+        <label for="pass-filter">Filter by pass type: </label>
+        <select id="pass-filter" onchange="filterMountains()">
+            <option value="all">All</option>
+            <option value="epic">Epic Pass</option>
+            <option value="ikon">Ikon Pass</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+
+    <ul class="mountain-list">
+      {% for x in mymountains %}
+        <li class="mountain-item" data-pass="{{ x.pass_type }}">
+            <a href="forecast/{{x.name}}" class="mountain-button">{{ x.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
 </div>
-
-<ul class="mountain-list">
-  {% for x in mymountains %}
-    <li class="mountain-item" data-pass="{{ x.pass_type }}">
-        <a href="forecast/{{x.name}}" class="mountain-button">{{ x.name }}</a>
-    </li>
-  {% endfor %}
-</ul>
 
 <script>
     function filterMountains() {
