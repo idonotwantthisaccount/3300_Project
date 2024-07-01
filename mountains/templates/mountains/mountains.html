@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+given this updated code that puts snowflakes, please have the flakes go behind the container: <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,9 +9,11 @@
             font-family: Arial, sans-serif;
             background-color: #add8e6; /* Light blue background */
             margin: 0;
-            padding: 0;
-            overflow: hidden; /* Prevent scrollbars */
-            position: relative; /* Establish stacking context for snowflakes */
+            padding: 20px;
+            display: flex;
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+            min-height: 100vh; /* Ensure full viewport height */
         }
         .container {
             max-width: 800px; /* Adjust as needed */
@@ -20,8 +22,6 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
-            position: relative; /* Maintain relative position */
-            z-index: 1; /* Ensure container is above snowflakes */
         }
         h1 {
             color: #343a40;
@@ -61,58 +61,17 @@
             background-color: #0056b3;
         }
 
-        /* Snowflake styling */
-        .snowflakes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Snowflakes should not interfere with user interaction */
-            z-index: 0; /* Ensure snowflakes are behind other content */
-        }
+        /* customizable snowflake styling */
         .snowflake {
             color: #fff;
             font-size: 1em;
             font-family: Arial, sans-serif;
             text-shadow: 0 0 5px #000;
-            position: absolute;
-            animation: snowflakes-fall 10s linear infinite, snowflakes-shake 3s ease-in-out infinite;
-        }
-        .snowflake .inner {
-            animation: snowflakes-fall 10s linear infinite;
-        }
-        @keyframes snowflakes-fall {
-            0% {
-                transform: translateY(-10%);
-            }
-            100% {
-                transform: translateY(110vh);
-            }
-        }
-        @keyframes snowflakes-shake {
-            0%, 100% {
-                transform: translateX(0);
-            }
-            50% {
-                transform: translateX(80px);
-            }
-        }
+}
+ 
+.snowflake,.snowflake .inner{animation-iteration-count:infinite;animation-play-state:running}@keyframes snowflakes-fall{0%{transform:translateY(0)}100%{transform:translateY(110vh)}}@keyframes snowflakes-shake{0%,100%{transform:translateX(0)}50%{transform:translateX(80px)}}.snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;user-select:none;cursor:default;animation-name:snowflakes-shake;animation-duration:3s;animation-timing-function:ease-in-out}.snowflake .inner{animation-duration:10s;animation-name:snowflakes-fall;animation-timing-function:linear}.snowflake:nth-of-type(0){left:1%;animation-delay:0s}.snowflake:nth-of-type(0) .inner{animation-delay:0s}.snowflake:first-of-type{left:10%;animation-delay:1s}.snowflake:first-of-type .inner,.snowflake:nth-of-type(8) .inner{animation-delay:1s}.snowflake:nth-of-type(2){left:20%;animation-delay:.5s}.snowflake:nth-of-type(2) .inner,.snowflake:nth-of-type(6) .inner{animation-delay:6s}.snowflake:nth-of-type(3){left:30%;animation-delay:2s}.snowflake:nth-of-type(11) .inner,.snowflake:nth-of-type(3) .inner{animation-delay:4s}.snowflake:nth-of-type(4){left:40%;animation-delay:2s}.snowflake:nth-of-type(10) .inner,.snowflake:nth-of-type(4) .inner{animation-delay:2s}.snowflake:nth-of-type(5){left:50%;animation-delay:3s}.snowflake:nth-of-type(5) .inner{animation-delay:8s}.snowflake:nth-of-type(6){left:60%;animation-delay:2s}.snowflake:nth-of-type(7){left:70%;animation-delay:1s}.snowflake:nth-of-type(7) .inner{animation-delay:2.5s}.snowflake:nth-of-type(8){left:80%;animation-delay:0s}.snowflake:nth-of-type(9){left:90%;animation-delay:1.5s}.snowflake:nth-of-type(9) .inner{animation-delay:3s}.snowflake:nth-of-type(10){left:25%;animation-delay:0s}.snowflake:nth-of-type(11){left:65%;animation-delay:2.5s}
+</style>
 
-        /* Snowflake positioning */
-        .snowflake:nth-of-type(1) { left: 1%; animation-delay: 0s; }
-        .snowflake:nth-of-type(2) { left: 10%; animation-delay: 1s; }
-        .snowflake:nth-of-type(3) { left: 20%; animation-delay: 0.5s; }
-        .snowflake:nth-of-type(4) { left: 30%; animation-delay: 2s; }
-        .snowflake:nth-of-type(5) { left: 40%; animation-delay: 2s; }
-        .snowflake:nth-of-type(6) { left: 50%; animation-delay: 3s; }
-        .snowflake:nth-of-type(7) { left: 60%; animation-delay: 2s; }
-        .snowflake:nth-of-type(8) { left: 70%; animation-delay: 1s; }
-        .snowflake:nth-of-type(9) { left: 80%; animation-delay: 0s; }
-        .snowflake:nth-of-type(10) { left: 90%; animation-delay: 1.5s; }
-        .snowflake:nth-of-type(11) { left: 25%; animation-delay: 0s; }
-        .snowflake:nth-of-type(12) { left: 65%; animation-delay: 2.5s; }
-    </style>
 </head>
 <body>
 
@@ -175,7 +134,7 @@
     <div class="snowflake">
       <div class="inner">❅</div>
     </div>
-</div>
+  </div>
 
 <script>
     function filterMountains() {
