@@ -22,9 +22,6 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
-            display: flex;
-            flex-wrap: wrap; /* Enable wrapping of items */
-            justify-content: center; /* Center items horizontally */
         }
         h1 {
             color: #343a40;
@@ -33,14 +30,19 @@
         .dropdown {
             margin-bottom: 20px;
         }
+        .mountain-list {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
         .mountain-item {
-            flex: 0 0 calc(33.33% - 20px); /* Adjust column width (33.33% for 3 columns) */
-            margin: 10px; /* Adjust spacing between columns */
-            text-align: center; /* Center align text within each item */
-            box-sizing: border-box; /* Include padding and border in width calculation */
+            width: calc(33.33% - 20px); /* Adjust width to fit three columns */
+            margin: 10px; /* Adjust spacing between items */
         }
         .mountain-button {
-            display: inline-block;
+            display: block;
             width: 100%;
             padding: 10px 20px;
             font-size: 16px;
@@ -74,11 +76,11 @@
     </div>
 
     <ul class="mountain-list">
-      {% for x in mymountains %}
+        {% for x in mymountains %}
         <li class="mountain-item" data-pass="{{ x.pass_type }}">
             <a href="forecast/{{x.name}}" class="mountain-button">{{ x.name }}</a>
         </li>
-      {% endfor %}
+        {% endfor %}
     </ul>
 </div>
 
@@ -89,7 +91,7 @@
         
         for (var i = 0; i < mountains.length; i++) {
             if (filter === 'all' || mountains[i].getAttribute('data-pass') === filter) {
-                mountains[i].style.display = 'block';
+                mountains[i].style.display = 'inline-block'; /* Display as inline-block */
             } else {
                 mountains[i].style.display = 'none';
             }
