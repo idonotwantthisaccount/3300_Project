@@ -65,6 +65,17 @@
             background-color: #0056b3;
         }
         /* Snowflake animation */
+        .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Prevent interaction with snowflakes */
+            z-index: 0; /* Ensure snowflakes are behind content */
+        }
+
+        /* Individual snowflake styling */
         .snowflake {
             position: absolute;
             background-color: #fff; /* White snowflakes */
@@ -73,20 +84,19 @@
             border-radius: 50%;
             pointer-events: none; /* Prevent interaction with snowflakes */
             animation: snowfall linear infinite;
-            z-index: 0; /* Ensure snowflakes are behind content */
         }
 
         /* Keyframes for snowfall animation */
         @keyframes snowfall {
             0% {
-                transform: translateY(-100vh) rotate(0deg); /* Start above viewport and rotate randomly */
+                transform: translateY(-10vh) rotate(0deg); /* Start above viewport and rotate randomly */
             }
             100% {
-                transform: translateY(100vh) rotate(360deg); /* End below viewport and complete rotation */
+                transform: translateY(110vh) rotate(360deg); /* End below viewport and complete rotation */
             }
         }
 
-        /* Generate snowflakes */
+        /* Adjust animation duration for different screen sizes */
         @media only screen and (min-width: 768px) {
             .snowflake {
                 animation-duration: 10s; /* Duration of animation */
@@ -127,7 +137,7 @@
     </ul>
 </div>
 
-<!-- Snowflakes -->
+<!-- Snowflakes container -->
 <div class="snowflakes"></div>
 
 <script>
@@ -146,7 +156,10 @@
     }
 
     // Call function to generate snowflakes when the page loads
-    window.addEventListener('load', generateSnowflakes);
+    window.addEventListener('load', function() {
+        generateSnowflakes();
+        setInterval(generateSnowflakes, 5000); // Regenerate snowflakes every 5 seconds
+    });
 </script>
 
 </body>
