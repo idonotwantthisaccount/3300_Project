@@ -1,17 +1,60 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ mymountain.name }} Forecast</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light grey background */
+            margin: 0;
+            padding: 20px;
+        }
+        .forecast-container {
+            max-width: 600px; /* Adjust as needed */
+            margin: 0 auto; /* Center align horizontally */
+            background-color: #fff; /* White background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
+        }
+        h1 {
+            color: #007bff; /* Blue color for the heading */
+            text-align: center; /* Center align heading */
+            margin-top: 0; /* Remove default margin for h1 */
+        }
+        p {
+            margin-bottom: 10px; /* Space between paragraphs */
+        }
+        .back-link {
+            text-align: center; /* Center align the back link */
+            margin-top: 20px; /* Space between content and back link */
+        }
+        .back-link a {
+            color: #007bff; /* Blue color for the link */
+            text-decoration: none; /* Remove underline */
+        }
+        .back-link a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
 <body>
 
-<h1>{{mymountain.name}}</h1>
-<p>The forecast for today is:</p>
-<p>Current Temp: {{Temp}}</p>
-<p>Current Base: {{Base}}</p>
-<p>Current UV: {{UV}}</p>
-<p>Current Visibility: {{Visibility}} </p>
-<p>Current Precipitation: {{Precipitation}}</p>
+<div class="forecast-container">
+    <h1>{{ mymountain.name }} Forecast</h1>
 
+    <p><strong>Current Temperature:</strong> {{ Temp }}</p>
+    <p><strong>Current Base:</strong> {{ Base }}</p>
+    <p><strong>Current UV Index:</strong> {{ UV }}</p>
+    <p><strong>Current Visibility:</strong> {{ Visibility }}</p>
+    <p><strong>Current Precipitation:</strong> {{ Precipitation }}</p>
 
-<p>Back to <a href="/">Mountains</a></p>
+    <div class="back-link">
+        <p>Back to <a href="/">Mountains</a></p>
+    </div>
+</div>
 
 </body>
 </html>
