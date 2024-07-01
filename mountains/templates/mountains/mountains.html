@@ -14,7 +14,6 @@
             justify-content: center; /* Center content horizontally */
             align-items: center; /* Center content vertically */
             min-height: 100vh; /* Ensure full viewport height */
-            overflow: hidden; /* Prevent scrollbars */
         }
         .container {
             max-width: 800px; /* Adjust as needed */
@@ -23,7 +22,6 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
-            position: relative; /* Ensure snowflakes stay within container */
         }
         h1 {
             color: #343a40;
@@ -42,6 +40,8 @@
         .mountain-item {
             width: calc(33.33% - 20px); /* Adjust width to fit three columns */
             margin: 10px; /* Adjust spacing around items */
+            text-align: center; /* Center align text within item */
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
         }
         .mountain-button {
             display: block;
@@ -60,34 +60,9 @@
         .mountain-button:hover {
             background-color: #0056b3;
         }
-        .snowflakes {
-            position: absolute;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 9999;
-        }
-        .snowflake {
-            position: absolute;
-            font-size: 15px;
-            color: #fff;
-            user-select: none;
-            pointer-events: none;
-            animation: snowfall linear infinite;
-        }
-        @keyframes snowfall {
-            0% {
-                transform: translateY(-10vh) rotate(0deg);
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
     </style>
 </head>
 <body>
-
-<div class="snowflakes"></div>
 
 <div class="container">
     <h1>Mountains</h1>
@@ -112,28 +87,6 @@
 </div>
 
 <script>
-    // Function to generate snowflakes
-    function generateSnowflakes() {
-        const container = document.querySelector('.snowflakes');
-        const snowflakeCount = 30; // Number of snowflakes
-
-        for (let i = 0; i < snowflakeCount; i++) {
-            const snowflake = document.createElement('div');
-            snowflake.className = 'snowflake';
-            snowflake.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
-            snowflake.style.top = Math.random() * -50 + 'vh'; // Random vertical position above viewport
-            snowflake.style.animationDelay = Math.random() * 5 + 's'; // Random animation delay
-            container.appendChild(snowflake);
-        }
-    }
-
-    // Call function to generate snowflakes when the page loads
-    window.addEventListener('load', function() {
-        generateSnowflakes();
-        setInterval(generateSnowflakes, 5000); // Regenerate snowflakes every 5 seconds
-    });
-
-    // Function to filter mountains based on pass type
     function filterMountains() {
         var filter = document.getElementById('pass-filter').value;
         var mountains = document.getElementsByClassName('mountain-item');
