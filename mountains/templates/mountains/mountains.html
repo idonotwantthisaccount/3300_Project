@@ -40,7 +40,8 @@
         }
         .mountain-button {
             display: block; /* Display as block to take full width of parent */
-            width: 100%; /* Equal width for all buttons */
+            width: calc(100% - 40px); /* Adjust width to fit within container */
+            max-width: 100%; /* Ensure button does not exceed container width */
             padding: 10px 20px;
             font-size: 16px;
             color: #fff;
@@ -51,6 +52,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             text-align: left; /* Left align text within buttons */
+            margin: 0 auto; /* Center horizontally within container */
         }
         .mountain-button:hover {
             background-color: #0056b3;
