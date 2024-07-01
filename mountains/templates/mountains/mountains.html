@@ -16,12 +16,15 @@
             min-height: 100vh; /* Ensure full viewport height */
         }
         .container {
-            max-width: 600px; /* Adjust as needed */
+            max-width: 800px; /* Adjust as needed */
             text-align: center; /* Center align content within container */
             background-color: #fff; /* White background for container */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
+            display: flex;
+            flex-wrap: wrap; /* Enable wrapping of items */
+            justify-content: center; /* Center items horizontally */
         }
         h1 {
             color: #343a40;
@@ -30,18 +33,15 @@
         .dropdown {
             margin-bottom: 20px;
         }
-        .mountain-list {
-            list-style-type: none;
-            padding: 0;
-            text-align: left; /* Left align the list */
-        }
-        .mountain-list li {
-            margin: 10px 0;
+        .mountain-item {
+            flex: 0 0 calc(33.33% - 20px); /* Adjust column width (33.33% for 3 columns) */
+            margin: 10px; /* Adjust spacing between columns */
+            text-align: center; /* Center align text within each item */
+            box-sizing: border-box; /* Include padding and border in width calculation */
         }
         .mountain-button {
-            display: block; /* Display as block to take full width of parent */
-            width: calc(100% - 40px); /* Adjust width to fit within container */
-            max-width: 100%; /* Ensure button does not exceed container width */
+            display: inline-block;
+            width: 100%;
             padding: 10px 20px;
             font-size: 16px;
             color: #fff;
@@ -51,8 +51,7 @@
             text-decoration: none;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            text-align: left; /* Left align text within buttons */
-            margin: 0 auto; /* Center horizontally within container */
+            text-align: center; /* Center align text within button */
         }
         .mountain-button:hover {
             background-color: #0056b3;
@@ -90,7 +89,7 @@
         
         for (var i = 0; i < mountains.length; i++) {
             if (filter === 'all' || mountains[i].getAttribute('data-pass') === filter) {
-                mountains[i].style.display = 'list-item';
+                mountains[i].style.display = 'block';
             } else {
                 mountains[i].style.display = 'none';
             }
