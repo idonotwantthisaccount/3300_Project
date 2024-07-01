@@ -14,6 +14,8 @@
             justify-content: center; /* Center content horizontally */
             align-items: center; /* Center content vertically */
             min-height: 100vh; /* Ensure full viewport height */
+            overflow: hidden; /* Hide overflow to prevent horizontal scrollbars */
+            position: relative; /* Position relative for snowflake absolute positioning */
         }
         .container {
             max-width: 800px; /* Adjust as needed */
@@ -22,6 +24,8 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
+            position: relative; /* Position relative for z-index */
+            z-index: 1; /* Ensure container is above snowflakes */
         }
         h1 {
             color: #343a40;
@@ -60,10 +64,47 @@
         .mountain-button:hover {
             background-color: #0056b3;
         }
+        /* Snowflake animation */
+        .snowflake {
+            position: absolute;
+            background-color: #fff; /* White snowflakes */
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            pointer-events: none; /* Prevent interaction with snowflakes */
+            animation: snowfall linear infinite;
+            z-index: 0; /* Ensure snowflakes are behind content */
+        }
+
+        /* Keyframes for snowfall animation */
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg); /* Start above viewport and rotate randomly */
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg); /* End below viewport and complete rotation */
+            }
+        }
+
+        /* Generate snowflakes */
+        @media only screen and (min-width: 768px) {
+            .snowflake {
+                animation-duration: 10s; /* Duration of animation */
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .snowflake {
+                width: 3px;
+                height: 3px;
+                animation-duration: 15s; /* Duration of animation */
+            }
+        }
     </style>
 </head>
 <body>
 
+<!-- Container with content -->
 <div class="container">
     <h1>Mountains</h1>
 
@@ -86,19 +127,26 @@
     </ul>
 </div>
 
+<!-- Snowflakes -->
+<div class="snowflakes"></div>
+
 <script>
-    function filterMountains() {
-        var filter = document.getElementById('pass-filter').value;
-        var mountains = document.getElementsByClassName('mountain-item');
-        
-        for (var i = 0; i < mountains.length; i++) {
-            if (filter === 'all' || mountains[i].getAttribute('data-pass') === filter) {
-                mountains[i].style.display = 'inline-block'; /* Display as inline-block */
-            } else {
-                mountains[i].style.display = 'none';
-            }
+    // Function to generate snowflakes
+    function generateSnowflakes() {
+        const container = document.querySelector('.snowflakes');
+        const snowflakeCount = 30; // Number of snowflakes
+
+        for (let i = 0; i < snowflakeCount; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+            snowflake.style.animationDelay = Math.random() * 5 + 's'; // Random animation delay
+            container.appendChild(snowflake);
         }
     }
+
+    // Call function to generate snowflakes when the page loads
+    window.addEventListener('load', generateSnowflakes);
 </script>
 
 </body>
