@@ -16,6 +16,7 @@
             min-height: 100vh; /* Ensure full viewport height */
             overflow: hidden; /* Prevent scrolling */
             color: #fff; /* White text color for better contrast */
+            position: relative; /* For positioning snowflakes */
         }
 
         .container {
@@ -25,7 +26,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
-            z-index: 1; /* Ensure container is above snowflakes */
+            z-index: 1; /* Ensure container is above other elements */
         }
 
         h1 {
@@ -71,152 +72,117 @@
                 background-color: #0056b3;
             }
 
-        /* customizable snowflake styling */
+        /* Snowflake styles */
         .snowflake {
-            color: #fff;
-            font-size: 1em;
-            font-family: Arial, sans-serif;
-            text-shadow: 0 0 5px #000;
             position: fixed;
             top: -10%;
             z-index: 0;
-            -webkit-user-select: none;
             user-select: none;
-            cursor: default;
-            animation-name: snowflakes-shake;
-            animation-duration: 3s;
-            animation-timing-function: ease-in-out;
-            animation-iteration-count: infinite; /* Ensure infinite animation */
+            pointer-events: none;
+            animation: fall linear infinite; /* Apply falling animation */
         }
 
-            .snowflake .inner {
-                animation-duration: 10s;
-                animation-name: snowflakes-fall;
-                animation-timing-function: linear;
-                animation-iteration-count: infinite; /* Ensure infinite animation */
-            }
-
-            .snowflake:nth-of-type(1) {
-                left: 1%;
-                animation-delay: 0s;
-            }
-
-                .snowflake:nth-of-type(1) .inner {
-                    animation-delay: 0s;
-                }
-
-            .snowflake:nth-of-type(2) {
-                left: 10%;
-                animation-delay: 1s;
-            }
-
-                .snowflake:nth-of-type(2) .inner, .snowflake:nth-of-type(8) .inner {
-                    animation-delay: 1s;
-                }
-
-            .snowflake:nth-of-type(3) {
-                left: 20%;
-                animation-delay: .5s;
-            }
-
-                .snowflake:nth-of-type(3) .inner, .snowflake:nth-of-type(6) .inner {
-                    animation-delay: 6s;
-                }
-
-            .snowflake:nth-of-type(4) {
-                left: 30%;
-                animation-delay: 2s;
-            }
-
-                .snowflake:nth-of-type(11) .inner, .snowflake:nth-of-type(4) .inner {
-                    animation-delay: 4s;
-                }
-
-            .snowflake:nth-of-type(5) {
-                left: 40%;
-                animation-delay: 2s;
-            }
-
-                .snowflake:nth-of-type(10) .inner, .snowflake:nth-of-type(5) .inner {
-                    animation-delay: 2s;
-                }
-
-            .snowflake:nth-of-type(6) {
-                left: 50%;
-                animation-delay: 3s;
-            }
-
-                .snowflake:nth-of-type(6) .inner {
-                    animation-delay: 8s;
-                }
-
-            .snowflake:nth-of-type(7) {
-                left: 60%;
-                animation-delay: 2s;
-            }
-
-            .snowflake:nth-of-type(8) {
-                left: 70%;
-                animation-delay: 1s;
-            }
-
-            .snowflake:nth-of-type(7) .inner {
-                animation-delay: 2.5s;
-            }
-
-            .snowflake:nth-of-type(9) {
-                left: 80%;
-                animation-delay: 0s;
-            }
-
-                .snowflake:nth-of-type(9) .inner {
-                    animation-delay: 1.5s;
-                }
-
-            .snowflake:nth-of-type(10) {
-                left: 90%;
-                animation-delay: 0s;
-            }
-
-            .snowflake:nth-of-type(11) {
-                left: 25%;
-                animation-delay: 2.5s;
-            }
-
-        @keyframes snowflakes-fall {
+        /* Keyframes for the falling animation */
+        @keyframes fall {
             0% {
                 transform: translateY(0);
             }
 
             100% {
-                transform: translateY(110vh);
+                transform: translateY(110vh); /* Move snowflakes from top to bottom */
             }
         }
 
-        @keyframes snowflakes-shake {
-            0%, 100% {
-                transform: translateX(0);
-            }
+        /* Different animations for individual snowflakes */
+        .snowflake:nth-child(1) {
+            left: 10%;
+            animation-duration: 15s;
+            animation-delay: 0s;
+        }
 
-            50% {
-                transform: translateX(80px);
-            }
+        .snowflake:nth-child(2) {
+            left: 20%;
+            animation-duration: 17s;
+            animation-delay: 2s;
+        }
+
+        .snowflake:nth-child(3) {
+            left: 30%;
+            animation-duration: 19s;
+            animation-delay: 4s;
+        }
+
+        .snowflake:nth-child(4) {
+            left: 40%;
+            animation-duration: 21s;
+            animation-delay: 6s;
+        }
+
+        .snowflake:nth-child(5) {
+            left: 50%;
+            animation-duration: 23s;
+            animation-delay: 8s;
+        }
+
+        .snowflake:nth-child(6) {
+            left: 60%;
+            animation-duration: 25s;
+            animation-delay: 10s;
+        }
+
+        .snowflake:nth-child(7) {
+            left: 70%;
+            animation-duration: 27s;
+            animation-delay: 12s;
+        }
+
+        .snowflake:nth-child(8) {
+            left: 80%;
+            animation-duration: 29s;
+            animation-delay: 14s;
+        }
+
+        .snowflake:nth-child(9) {
+            left: 90%;
+            animation-duration: 31s;
+            animation-delay: 16s;
         }
     </style>
 
     <script>
-        function filterMountains() {
-            var filter = document.getElementById('pass-filter').value;
-            var mountains = document.getElementsByClassName('mountain-item');
+        // Function to create snowflakes
+        function createSnowflakes() {
+            const container = document.querySelector('body'); // Select the body element
+            for (let i = 0; i < 50; i++) { // Create 50 snowflakes
+                const snowflake = document.createElement('div'); // Create a div element
+                snowflake.className = 'snowflake'; // Assign the 'snowflake' class
+                snowflake.innerHTML = '❅'; // Use a snowflake character
+                // Set random properties for each snowflake
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+                container.appendChild(snowflake); // Add the snowflake to the body
+            }
+        }
 
+        // Function to filter mountains based on pass type
+        function filterMountains() {
+            var filter = document.getElementById('pass-filter').value; // Get the selected filter value
+            var mountains = document.getElementsByClassName('mountain-item'); // Get all mountain items
+
+            // Loop through each mountain item
             for (var i = 0; i < mountains.length; i++) {
                 if (filter === 'all' || mountains[i].getAttribute('data-pass') === filter) {
-                    mountains[i].style.display = 'inline-block'; /* Display */
+                    mountains[i].style.display = 'inline-block'; // Display the item
                 } else {
-                    mountains[i].style.display = 'none'; /* Hide */
+                    mountains[i].style.display = 'none'; // Hide the item
                 }
             }
         }
+
+        // Call createSnowflakes when the window loads
+        window.onload = createSnowflakes;
     </script>
 </head>
 <body>
@@ -241,45 +207,6 @@
             </li>
             {% endfor %}
         </ul>
-    </div>
-
-    <div class="snowflakes" aria-hidden="true">
-        <div class="snowflake">
-            <div class="inner">❅</div>
-        </div>
-        <div class="snowflake">
-            <div class="inner">❅</div>
-        </div>
-        <div class="snowflake">
-            <div class="inner">❅</div>
-        </div>
-        <div class="snowflake">
-            <div class="inner">❅</div>
-        </div>
-        <div class="snowflake">
-            <div class="inner">❅</div>
-        </div>
-        <div class="snowflake">
-            <div class="inner">❅</div>
-        </div>
-        <div class="snowflake">
-            <div class="inner">❅</div>
-        </div>
-        <div class="snowflake">
-            <div class="inner">❅</div>
-        </div>
-        <div class="snowflake">
-            <div class="inner">❅</div>
-        </div>
-        <div class="snowflake">
-            <div class="inner">❅</div>
-        </div>
-        <div class="snowflake">
-            <div class="inner">❅</div>
-        </div>
-        <div class="snowflake">
-            <div class="inner">❅</div>
-        </div>
     </div>
 
 </body>
