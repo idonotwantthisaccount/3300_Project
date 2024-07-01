@@ -7,30 +7,36 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #add8e6; /* Light blue background */
+            background-color: #2c3e50; /* Dark blue background */
             margin: 0;
             padding: 20px;
             display: flex;
             justify-content: center; /* Center content horizontally */
             align-items: center; /* Center content vertically */
             min-height: 100vh; /* Ensure full viewport height */
+            overflow: hidden; /* Prevent scrolling */
+            color: #fff; /* White text color for better contrast */
         }
+
         .container {
             max-width: 800px; /* Adjust as needed */
             text-align: center; /* Center align content within container */
-            background-color: #fff; /* White background for container */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for container */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
             z-index: 1; /* Ensure container is above snowflakes */
         }
+
         h1 {
             color: #343a40;
             margin-top: 0; /* Remove default margin for h1 */
         }
+
         .dropdown {
             margin-bottom: 20px;
         }
+
         .mountain-list {
             list-style-type: none;
             padding: 0;
@@ -38,12 +44,14 @@
             flex-wrap: wrap;
             justify-content: center;
         }
+
         .mountain-item {
             width: calc(33.33% - 20px); /* Adjust width to fit three columns */
             margin: 10px; /* Adjust spacing around items */
             text-align: center; /* Center align text within item */
             box-sizing: border-box; /* Include padding and border in element's total width and height */
         }
+
         .mountain-button {
             display: block;
             width: calc(100% - 20px); /* Adjust width to accommodate margins */
@@ -58,9 +66,10 @@
             transition: background-color 0.3s ease;
             text-align: center; /* Center align text within button */
         }
-        .mountain-button:hover {
-            background-color: #0056b3;
-        }
+
+            .mountain-button:hover {
+                background-color: #0056b3;
+            }
 
         /* customizable snowflake styling */
         .snowflake {
@@ -68,90 +77,210 @@
             font-size: 1em;
             font-family: Arial, sans-serif;
             text-shadow: 0 0 5px #000;
-            z-index: 0; /* Ensure snowflakes are behind other content */
-}
- 
-.snowflake,.snowflake .inner{animation-iteration-count:infinite;animation-play-state:running}@keyframes snowflakes-fall{0%{transform:translateY(0)}100%{transform:translateY(110vh)}}@keyframes snowflakes-shake{0%,100%{transform:translateX(0)}50%{transform:translateX(80px)}}.snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;user-select:none;cursor:default;animation-name:snowflakes-shake;animation-duration:3s;animation-timing-function:ease-in-out}.snowflake .inner{animation-duration:10s;animation-name:snowflakes-fall;animation-timing-function:linear}.snowflake:nth-of-type(0){left:1%;animation-delay:0s}.snowflake:nth-of-type(0) .inner{animation-delay:0s}.snowflake:first-of-type{left:10%;animation-delay:1s}.snowflake:first-of-type .inner,.snowflake:nth-of-type(8) .inner{animation-delay:1s}.snowflake:nth-of-type(2){left:20%;animation-delay:.5s}.snowflake:nth-of-type(2) .inner,.snowflake:nth-of-type(6) .inner{animation-delay:6s}.snowflake:nth-of-type(3){left:30%;animation-delay:2s}.snowflake:nth-of-type(11) .inner,.snowflake:nth-of-type(3) .inner{animation-delay:4s}.snowflake:nth-of-type(4){left:40%;animation-delay:2s}.snowflake:nth-of-type(10) .inner,.snowflake:nth-of-type(4) .inner{animation-delay:2s}.snowflake:nth-of-type(5){left:50%;animation-delay:3s}.snowflake:nth-of-type(5) .inner{animation-delay:8s}.snowflake:nth-of-type(6){left:60%;animation-delay:2s}.snowflake:nth-of-type(7){left:70%;animation-delay:1s}.snowflake:nth-of-type(7) .inner{animation-delay:2.5s}.snowflake:nth-of-type(8){left:80%;animation-delay:0s}.snowflake:nth-of-type(9){left:90%;animation-delay:1.5s}.snowflake:nth-of-type(9) .inner{animation-delay:3s}.snowflake:nth-of-type(10){left:25%;animation-delay:0s}.snowflake:nth-of-type(11){left:65%;animation-delay:2.5s}
-</style>
+            position: fixed;
+            top: -10%;
+            z-index: 0;
+            -webkit-user-select: none;
+            user-select: none;
+            cursor: default;
+            animation-name: snowflakes-shake;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite; /* Ensure infinite animation */
+        }
 
+            .snowflake .inner {
+                animation-duration: 10s;
+                animation-name: snowflakes-fall;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite; /* Ensure infinite animation */
+            }
+
+            .snowflake:nth-of-type(1) {
+                left: 1%;
+                animation-delay: 0s;
+            }
+
+                .snowflake:nth-of-type(1) .inner {
+                    animation-delay: 0s;
+                }
+
+            .snowflake:nth-of-type(2) {
+                left: 10%;
+                animation-delay: 1s;
+            }
+
+                .snowflake:nth-of-type(2) .inner, .snowflake:nth-of-type(8) .inner {
+                    animation-delay: 1s;
+                }
+
+            .snowflake:nth-of-type(3) {
+                left: 20%;
+                animation-delay: .5s;
+            }
+
+                .snowflake:nth-of-type(3) .inner, .snowflake:nth-of-type(6) .inner {
+                    animation-delay: 6s;
+                }
+
+            .snowflake:nth-of-type(4) {
+                left: 30%;
+                animation-delay: 2s;
+            }
+
+                .snowflake:nth-of-type(11) .inner, .snowflake:nth-of-type(4) .inner {
+                    animation-delay: 4s;
+                }
+
+            .snowflake:nth-of-type(5) {
+                left: 40%;
+                animation-delay: 2s;
+            }
+
+                .snowflake:nth-of-type(10) .inner, .snowflake:nth-of-type(5) .inner {
+                    animation-delay: 2s;
+                }
+
+            .snowflake:nth-of-type(6) {
+                left: 50%;
+                animation-delay: 3s;
+            }
+
+                .snowflake:nth-of-type(6) .inner {
+                    animation-delay: 8s;
+                }
+
+            .snowflake:nth-of-type(7) {
+                left: 60%;
+                animation-delay: 2s;
+            }
+
+            .snowflake:nth-of-type(8) {
+                left: 70%;
+                animation-delay: 1s;
+            }
+
+            .snowflake:nth-of-type(7) .inner {
+                animation-delay: 2.5s;
+            }
+
+            .snowflake:nth-of-type(9) {
+                left: 80%;
+                animation-delay: 0s;
+            }
+
+                .snowflake:nth-of-type(9) .inner {
+                    animation-delay: 1.5s;
+                }
+
+            .snowflake:nth-of-type(10) {
+                left: 90%;
+                animation-delay: 0s;
+            }
+
+            .snowflake:nth-of-type(11) {
+                left: 25%;
+                animation-delay: 2.5s;
+            }
+
+        @keyframes snowflakes-fall {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(110vh);
+            }
+        }
+
+        @keyframes snowflakes-shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(80px);
+            }
+        }
+    </style>
+
+    <script>
+        function filterMountains() {
+            var filter = document.getElementById('pass-filter').value;
+            var mountains = document.getElementsByClassName('mountain-item');
+
+            for (var i = 0; i < mountains.length; i++) {
+                if (filter === 'all' || mountains[i].getAttribute('data-pass') === filter) {
+                    mountains[i].style.display = 'inline-block'; /* Display */
+                } else {
+                    mountains[i].style.display = 'none'; /* Hide */
+                }
+            }
+        }
+    </script>
 </head>
 <body>
 
-<div class="container">
-    <h1>Mountains</h1>
+    <div class="container">
+        <h1>Mountains</h1>
 
-    <div class="dropdown">
-        <label for="pass-filter">Filter by pass type: </label>
-        <select id="pass-filter" onchange="filterMountains()">
-            <option value="all">All</option>
-            <option value="epic">Epic Pass</option>
-            <option value="ikon">Ikon Pass</option>
-            <option value="other">Other</option>
-        </select>
+        <div class="dropdown">
+            <label for="pass-filter">Filter by pass type: </label>
+            <select id="pass-filter" onchange="filterMountains()">
+                <option value="all">All</option>
+                <option value="epic">Epic Pass</option>
+                <option value="ikon">Ikon Pass</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <ul class="mountain-list">
+            {% for x in mymountains %}
+            <li class="mountain-item" data-pass="{{ x.pass_type }}">
+                <a href="forecast/{{x.name}}" class="mountain-button">{{ x.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
 
-    <ul class="mountain-list">
-        {% for x in mymountains %}
-        <li class="mountain-item" data-pass="{{ x.pass_type }}">
-            <a href="forecast/{{x.name}}" class="mountain-button">{{ x.name }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-
-<div class="snowflakes" aria-hidden="true">
-    <div class="snowflake">
-      <div class="inner">❅</div>
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">
+            <div class="inner">❅</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❅</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❅</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❅</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❅</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❅</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❅</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❅</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❅</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❅</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❅</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❅</div>
+        </div>
     </div>
-    <div class="snowflake">
-      <div class="inner">❅</div>
-    </div>
-    <div class="snowflake">
-      <div class="inner">❅</div>
-    </div>
-    <div class="snowflake">
-      <div class="inner">❅</div>
-    </div>
-    <div class="snowflake">
-      <div class="inner">❅</div>
-    </div>
-    <div class="snowflake">
-      <div class="inner">❅</div>
-    </div>
-    <div class="snowflake">
-      <div class="inner">❅</div>
-    </div>
-    <div class="snowflake">
-      <div class="inner">❅</div>
-    </div>
-    <div class="snowflake">
-      <div class="inner">❅</div>
-    </div>
-    <div class="snowflake">
-      <div class="inner">❅</div>
-    </div>
-    <div class="snowflake">
-      <div class="inner">❅</div>
-    </div>
-    <div class="snowflake">
-      <div class="inner">❅</div>
-    </div>
-  </div>
-
-<script>
-    function filterMountains() {
-        var filter = document.getElementById('pass-filter').value;
-        var mountains = document.getElementsByClassName('mountain-item');
-        
-        for (var i = 0; i < mountains.length; i++) {
-            if (filter === 'all' || mountains[i].getAttribute('data-pass') === filter) {
-                mountains[i].style.display = 'inline-block'; /* Display as inline-block */
-            } else {
-                mountains[i].style.display = 'none';
-            }
-        }
-    }
-</script>
 
 </body>
 </html>
