@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mountains</title>
+    <title>Colorado Snow</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,7 +14,6 @@
             justify-content: center; /* Center content horizontally */
             align-items: center; /* Center content vertically */
             min-height: 100vh; /* Ensure full viewport height */
-            overflow: hidden; /* Prevent scrolling */
             color: #fff; /* White text color for better contrast */
             position: relative; /* For positioning snowflakes */
         }
@@ -41,22 +40,22 @@
         .mountain-list {
             list-style-type: none;
             padding: 0;
+            margin: 0; /* Remove margin-right */
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .mountain-item {
-            width: calc(33.33% - 30px); /* Adjust width to fit three columns */
-            margin: 13px; /* Adjust spacing around items */
+            margin: 10px; /* Add spacing around items */
             text-align: center; /* Center align text within item */
             box-sizing: border-box; /* Include padding and border in element's total width and height */
         }
 
         .mountain-button {
             display: block;
-            width: calc(100% - 20px); /* Adjust width to accommodate margins */
-            padding: 12px 10px;
+            width: 200px; /* Set a fixed width for buttons */
+            padding: 12px;
             font-size: 16px;
             color: #fff;
             background-color: #007bff;
@@ -66,11 +65,25 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             text-align: center; /* Center align text within button */
+            word-wrap: break-word; /* Ensure long words wrap within the button */
         }
 
             .mountain-button:hover {
                 background-color: #0056b3;
             }
+
+        /* Media queries for responsive design */
+        @media (max-width: 768px) {
+            .mountain-item {
+                flex: 1 1 calc(50% - 20px); /* Adjust width to fit two columns on tablets */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mountain-item {
+                flex: 1 1 calc(100% - 20px); /* Adjust width to fit one column on mobile devices */
+            }
+        }
 
         /* Snowflake styles */
         .snowflake {
