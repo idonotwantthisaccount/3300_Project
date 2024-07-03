@@ -5,188 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Colorado Snow</title>
     <style>
+        /* The body of the page */
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial, sans-serif; /* Fonts for text */
             background-color: #2c3e50; /* Dark blue background */
-            margin: 0;
-            padding: 20px;
-            display: flex;
+            padding: 30px; /* Ensures that the container is atleast 30 px from the edge of the screen */
+            display: flex; /* Allows the container to follow justification rules below */
             justify-content: center; /* Center content horizontally */
             align-items: center; /* Center content vertically */
-            min-height: 100vh; /* Ensure full viewport height */
-            color: #fff; /* White text color for better contrast */
-            position: relative; /* For positioning snowflakes */
+            color: #fff; /* White text color for snow flakes */
+            position: relative; /* For positioning snowflakes relative to the body */
         }
 
+        /* The container */
         .container {
-            max-width: 800px; /* Adjust as needed */
-            text-align: center; /* Center align content within container */
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for container */
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
-            z-index: 1; /* Ensure container is above other elements */
+            max-width: 800px; /* Set max width of the container */
+            text-align: center; /* Centers the content within container */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for the container */
+            padding: 15px; /* Adds space between the contents of the container and the edge of the container */
+            border-radius: 10px; /* Rounds the corners of the container */
+            z-index: 1; /* Ensure container is in front of the snow */
         }
 
+        /* The title in the container */
         h1 {
             color: #343a40;
-            margin-top: 0; /* Remove default margin for h1 */
         }
 
-        .dropdown {
-            margin-bottom: 20px;
+        /* The filter prompt below the title */
+        .dropdown label {
+            color: #343a40;
         }
 
+        /* The table aspect of the buttons */
         .mountain-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0; /* Remove margin-right */
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            list-style-type: none; /* Removes bullet points that appear with the buttons */
+            padding-right: 28px; /* Fixes the problem of the buttons being too close to the container edge on the right side */
+            display: flex; /* Allows for the buttons to lay in multiple columns instead of just one column */
+            flex-wrap: wrap; /* Allows for the buttons to lay in multiple rows instead of just one row */ 
+            justify-content: center; /* Ensures that the columns of buttons are centered to the container */
         }
 
-        .mountain-item {
-            margin: 10px; /* Add spacing around items */
-            text-align: center; /* Center align text within item */
-            box-sizing: border-box; /* Include padding and border in element's total width and height */
-        }
-
+        /* The mountain buttons */
         .mountain-button {
-            display: block;
+            display: block; /* Makes each button take the full width available preventing button overlap */
             width: 200px; /* Set a fixed width for buttons */
-            padding: 12px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 10px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            text-align: center; /* Center align text within button */
-            word-wrap: break-word; /* Ensure long words wrap within the button */
+            padding: 12px; /* Adds padding from the text to the edge of the button */
+            font-size: 16px; /* Button font size */
+            color: #fff; /* Makes text white */
+            background-color: #007bff; /* Create the light blue button background color */
+            border-radius: 10px; /* Rounds the corners of the buttons */
+            text-decoration: none; /* Removes the underline below button text */
+            cursor: pointer; /* Changes the cursor to a pointer to help signify the button is interactable */
+            transition: background-color 0.3s ease; /* Changes the button color that your cursor is hovering over */
+            text-align: center; /* Center aligns the text within the button */
+            margin: 10px; /* Adds spacing between mountain buttons */
         }
 
+            /* The color for button hover effect */
             .mountain-button:hover {
                 background-color: #0056b3;
             }
 
-        /* Media queries for responsive design */
-        @media (max-width: 768px) {
-            .mountain-item {
-                flex: 1 1 calc(50% - 20px); /* Adjust width to fit two columns on tablets */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .mountain-item {
-                flex: 1 1 calc(100% - 20px); /* Adjust width to fit one column on mobile devices */
-            }
-        }
-
-        /* Snowflake styles */
+        /* The snowflake */
         .snowflake {
-            position: fixed;
-            top: -10%;
-            z-index: 0;
-            user-select: none;
-            pointer-events: none;
-            animation: fall linear infinite; /* Apply falling animation */
+            position: fixed; /* Fixes the snowflake's position relative to the screen */
+            top: -10%; /* Starts the snowflakes off the screen */
+            z-index: 0; /* Ensures that the snowflakes are behind all other contents on the page */
+            cursor: auto; /* Ensures the cursor does not change when hovering over it */
+            user-select: none; /* Prevents text selection */
+            animation: fall linear infinite; /* Applies the falling animation */
         }
 
         /* Keyframes for the falling animation */
         @keyframes fall {
             0% {
-                transform: translateY(0);
+                transform: translateY(0); /* Starts the snowflakes animation at its current position */
             }
 
             100% {
-                transform: translateY(110vh); /* Move snowflakes from top to bottom */
+                transform: translateY(110vh); /* Ends the snow flakes animation below the bottom of the screen */
             }
-        }
-
-        /* Different animations for individual snowflakes */
-        .snowflake:nth-child(1) {
-            left: 10%;
-            animation-duration: 19s;
-            animation-delay: 0s;
-        }
-
-        .snowflake:nth-child(2) {
-            left: 20%;
-            animation-duration: 21s;
-            animation-delay: 2s;
-        }
-
-        .snowflake:nth-child(3) {
-            left: 30%;
-            animation-duration: 23s;
-            animation-delay: 4s;
-        }
-
-        .snowflake:nth-child(4) {
-            left: 40%;
-            animation-duration: 25s;
-            animation-delay: 6s;
-        }
-
-        .snowflake:nth-child(5) {
-            left: 50%;
-            animation-duration: 27s;
-            animation-delay: 8s;
-        }
-
-        .snowflake:nth-child(6) {
-            left: 60%;
-            animation-duration: 29s;
-            animation-delay: 10s;
-        }
-
-        .snowflake:nth-child(7) {
-            left: 70%;
-            animation-duration: 31s;
-            animation-delay: 12s;
-        }
-
-        .snowflake:nth-child(8) {
-            left: 80%;
-            animation-duration: 33s;
-            animation-delay: 14s;
-        }
-
-        .snowflake:nth-child(9) {
-            left: 90%;
-            animation-duration: 35s;
-            animation-delay: 16s;
         }
     </style>
 
     <script>
-        // Function to create snowflakes
+        // Function to create snowflakes randomly across the top of the screen
         function createSnowflakes() {
-            const container = document.querySelector('body'); // Select the body element
-            for (let i = 0; i < 50; i++) { // Create 50 snowflakes
-                const snowflake = document.createElement('div'); // Create a div element
-                snowflake.className = 'snowflake'; // Assign the 'snowflake' class
-                snowflake.innerHTML = '❅'; // Use a snowflake character
-                // Set random properties for each snowflake
-                snowflake.style.left = Math.random() * 100 + 'vw';
-                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-                snowflake.style.animationDelay = Math.random() * 5 + 's';
-                snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-                container.appendChild(snowflake); // Add the snowflake to the body
+            const container = document.querySelector('body'); // Selects the body element
+            for (let i = 0; i < 50; i++) { // Creates 60 snowflakes
+                const snowflake = document.createElement('div'); // Creates a div element
+                snowflake.className = 'snowflake'; // Assigns the 'snowflake' class
+                snowflake.innerHTML = '❅'; // Uses a snowflake character
+                // Sets random properties for each snowflake
+                snowflake.style.left = Math.random() * 100 + 'vw'; // Moves the starting x-axis location of the snowflake
+                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // Changes the speed of the snowflake
+                snowflake.style.animationDelay = Math.random() * 5 + 's'; // Spreads out the timing of the falling snowflakes
+                snowflake.style.fontSize = Math.random() * 10 + 10 + 'px'; // Alters the size of the snowflake
+                container.appendChild(snowflake); // Adds the snowflake to the body
             }
         }
 
         // Function to filter mountains based on pass type
         function filterMountains() {
-            var filter = document.getElementById('pass-filter').value; // Get the selected filter value
-            var mountains = document.getElementsByClassName('mountain-item'); // Get all mountain items
+            var filter = document.getElementById('pass-filter').value; // Gets the selected filter value
+            var mountains = document.getElementsByClassName('mountain-item'); // Gets all mountain items
 
-            // Loop through each mountain item
+            // Loops through each mountain item
             for (var i = 0; i < mountains.length; i++) {
-                if (filter === 'all' || mountains[i].getAttribute('data-pass') === filter) {
+                if (filter === 'all' || mountains[i].getAttribute('data-pass') === filter) { // if the filter value is "all" or if the filter value matches the mountains pass
                     mountains[i].style.display = 'inline-block'; // Display the item
                 } else {
                     mountains[i].style.display = 'none'; // Hide the item
@@ -194,17 +121,16 @@
             }
         }
 
-        // Call createSnowflakes when the window loads
-        window.onload = createSnowflakes;
+        window.onload = createSnowflakes; // Calls createSnowflakes when the window loads
     </script>
 </head>
 <body>
 
     <div class="container">
         <h1>Colorado Mountain and Ski Resorts</h1>
-
+        
         <div class="dropdown">
-            <label for="pass-filter">Filter by pass type: </label>
+            <label for="pass-filter">Filter mountains by ski pass: </label>
             <select id="pass-filter" onchange="filterMountains()">
                 <option value="all">All</option>
                 <option value="epic">Epic Pass</option>
