@@ -8,7 +8,6 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #87CEEB; /* Light blue background */
-            margin: 0;
             padding: 20px;
             display: flex;
             justify-content: center; /* Center content horizontally */
@@ -53,11 +52,17 @@
     <div class="forecast-container">
         <h1>{{ mymountain.name }} Forecast</h1>
 
-        <p><strong>Current Temperature:</strong> {{ Temp }}</p>
-        <p><strong>Current Base:</strong> {{ Base }}</p>
+        <label for="unit-system">Select Unit System: </label>
+        <select id="unit-system" onchange="updateUnits()">
+            <option value="imperial">Imperial</option>
+            <option value="metric">Metric</option>
+        </select>
+
+        <p id="temperature"><strong>Current Temperature:</strong> {{ Temp }} F</p>
+        <p id="base"><strong>Current Base:</strong> {{ Base }}</p>
         <p><strong>Current UV Index:</strong> {{ UV }}</p>
         <p id="visibility"><strong>Current Visibility:</strong> {{ Visibility }} meters</p>
-        <p><strong>Current Precipitation:</strong> {{ Precipitation }}</p>
+        <p id="precipitation"><strong>Current Precipitation:</strong> {{ Precipitation }} in</p>
 
         <div class="back-link">
             <p>Back to <a href="/">Mountains</a></p>
@@ -65,20 +70,87 @@
     </div>
 
     <script>
-        // Function to convert meters to miles
-        function metersToMiles(meters) {
-            return (meters * 0.000621371).toFixed(2); // Convert meters to miles and round to 2 decimal places
+    // Function to convert meters to miles
+    function metersToMiles(meters) {
+        return (meters * 0.000621371).toFixed(2); // Convert meters to miles and round to 2 decimal places
         }
 
-        // Update visibility in miles
-        window.onload = function() {
-            const visibilityElement = document.getElementById('visibility');
-            if (visibilityElement) {
-                const visibilityValue = parseFloat('{{ Visibility }}'); // Assuming {{ Visibility }} is replaced server-side with a numerical value in meters
-                const visibilityInMiles = metersToMiles(visibilityValue); // Convert visibility from meters to miles
-                visibilityElement.innerHTML = `<strong>Current Visibility:</strong> ${visibilityInMiles} miles`; // Update the HTML content with visibility in miles
+    function metersToKm(meters) {
+        return (meters / 1000).toFixed(2); // Convert meters to kilometers and round to 2 decimal places
+    }
+
+    // Function to convert Fahrenheit to Celsius
+    function fahrenheitToCelsius(degreesF) {
+        return (((degreesF - 32) * 5) / 9).toFixed(2);
+    }
+
+    // Function to convert feet to meters
+    function feetToMeters(feet) {
+        return (feet * 0.3048).toFixed(2); // Convert feet to meters and round to 2 decimal places
+    }
+
+    // Function to convert inches to millimeters
+    function inchesToMillimeters(inches) {
+        return (inches * 25.4).toFixed(2); // Convert inches to millimeters and round to 2 decimal places
+    }
+
+    // Function to format numbers with commas
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    // Update visibility, temperature, base, and precipitation based on selected unit system
+    function updateUnits() {
+        const unitSystem = document.getElementById('unit-system').value;
+        const visibilityElement = document.getElementById('visibility');
+        const tempElement = document.getElementById('temperature');
+        const baseElement = document.getElementById('base');
+        const precipitationElement = document.getElementById('precipitation');
+
+        // Update visibility
+        const visibilityValue = parseFloat('{{ Visibility }}');
+        if (unitSystem === 'imperial') {
+            const visibilityInMiles = metersToMiles(visibilityValue); // Convert visibility from meters to miles
+            visibilityElement.innerHTML = `<strong>Current Visibility:</strong> ${visibilityInMiles} miles`;
+        } else {
+            const visibilityInKm = metersToKm(visibilityValue); // Convert visibility from meters to Km's
+            const visibilityFormatted = formatNumberWithCommas(visibilityInKm);
+            visibilityElement.innerHTML = `<strong>Current Visibility:</strong> ${visibilityFormatted} kilometers`;
+        }
+
+        // Update temperature
+        const getFahrenheit = parseFloat('{{ Temp }}'.replace('F', '')); // Remove the 'F' and convert to number
+        if (unitSystem === 'metric') {
+            const tempInCelsius = fahrenheitToCelsius(getFahrenheit); // Convert temp from Fahrenheit to Celsius
+            tempElement.innerHTML = `<strong>Current Temperature:</strong> ${tempInCelsius} C`;
+        } else {
+            tempElement.innerHTML = `<strong>Current Temperature:</strong> ${getFahrenheit} F`;
+        }
+
+        // Update base
+        const baseValue = parseFloat('{{ Base }}');
+        if (baseValue) {
+            if (unitSystem === 'metric') {
+                const baseInMeters = feetToMeters(baseValue); // Convert base from feet to meters
+                baseElement.innerHTML = `<strong>Current Base:</strong> ${baseInMeters} meters`;
+            } else {
+                baseElement.innerHTML = `<strong>Current Base:</strong> ${baseValue} ft`;
             }
-        };
+        }
+
+        // Update precipitation
+        const precipitationValue = parseFloat('{{ Precipitation }}');
+        if (unitSystem === 'metric') {
+            const precipitationInMillimeters = inchesToMillimeters(precipitationValue); // Convert precipitation from inches to millimeters
+            precipitationElement.innerHTML = `<strong>Current Precipitation:</strong> ${precipitationInMillimeters} mm`;
+        } else {
+            precipitationElement.innerHTML = `<strong>Current Precipitation:</strong> ${precipitationValue} in`;
+        }
+    }
+
+    window.onload = function() {
+        updateUnits(); // Set initial units based on the default value
+    };
     </script>
 
 </body>
