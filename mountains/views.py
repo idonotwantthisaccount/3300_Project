@@ -9,38 +9,41 @@
 from django.shortcuts import render
 import json, datetime
 import urllib.request
-
-
-# Create your views here.
-
-from django.shortcuts import render
 from .models import Mountain
 
 def mountains(response):
     mymountains = Mountain.objects.all().order_by('name').values('name', 'pass_type')
-    context = { 'mymountains' : mymountains, }
-    return render(response, "mountains/mountains.html", {'mymountains' : mymountains})
+    return render(response, "mountains/mountains.html", {'mymountains': mymountains})
 
 def forecast(response, name):
     mymountain = Mountain.objects.get(name=name)
     lat = mymountain.lat
     lon = mymountain.lon
 
-    weather_data = urllib.request.urlopen(
-        'https://api.open-meteo.com/v1/forecast?latitude=' + str(lat) + '&longitude=' + str(lon) + 
-             '&current=temperature_2m&hourly=precipitation,visibility,uv_index&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FDenver&forecast_days=1').read()
+    weather_url = (
+        f'https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}'
+        '&current_weather=true&hourly=precipitation,visibility,snow_depth,uv_index'
+        '&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FDenver&forecast_days=1'
+    )
     
+    weather_data = urllib.request.urlopen(weather_url).read()
     data_list = json.loads(weather_data)
     
-    hour = datetime.datetime.now().hour
+    current_hour = datetime.datetime.now().hour
 
-
-    Temp = str(data_list['current']['temperature_2m']) + 'F'
-    Precipitation = str(data_list['hourly']['precipitation'][hour])
-    Visibility = str(data_list['hourly']['visibility'][hour])
-    #Base = str(data_list['hourly']['snow_depth'][hour])
-    UV = str(data_list['hourly']['uv_index'][hour])
+    Temp = str(data_list['current_weather']['temperature'])
+    Precipitation = str(data_list['hourly']['precipitation'][current_hour])
+    Visibility = str(data_list['hourly']['visibility'][current_hour])
+    Base = str(data_list['hourly']['snow_depth'][current_hour])
+    UV = str(data_list['hourly']['uv_index'][current_hour])
     
-    #print(weather)
-    return render(response, "mountains/forecast.html", {'mymountain':mymountain, 'Temp':Temp,
-    'UV':UV, 'Visibility':Visibility, 'Precipitation':Precipitation})
+    context = {
+        'mymountain': mymountain,
+        'Temp': Temp,
+        'UV': UV,
+        'Visibility': Visibility,
+        'Base': Base,
+        'Precipitation': Precipitation
+    }
+    
+    return render(response, "mountains/forecast.html", context)

@@ -75,8 +75,14 @@
         return (meters * 0.000621371).toFixed(2); // Convert meters to miles and round to 2 decimal places
         }
 
+    // Function to convert meters to kilometers
     function metersToKm(meters) {
         return (meters / 1000).toFixed(2); // Convert meters to kilometers and round to 2 decimal places
+    }
+
+    // Function to convert meters to feet
+    function metersToFeet(meters) {
+        return (meters * 3.2808399).toFixed(2); // Convert meters to feet and round to 2 decimal places
     }
 
     // Function to convert Fahrenheit to Celsius
@@ -88,6 +94,7 @@
     function feetToMeters(feet) {
         return (feet * 0.3048).toFixed(2); // Convert feet to meters and round to 2 decimal places
     }
+
 
     // Function to convert inches to millimeters
     function inchesToMillimeters(inches) {
@@ -129,13 +136,13 @@
 
         // Update base
         const baseValue = parseFloat('{{ Base }}');
-        if (baseValue) {
-            if (unitSystem === 'metric') {
-                const baseInMeters = feetToMeters(baseValue); // Convert base from feet to meters
-                baseElement.innerHTML = `<strong>Current Base:</strong> ${baseInMeters} meters`;
-            } else {
-                baseElement.innerHTML = `<strong>Current Base:</strong> ${baseValue} ft`;
-            }
+        if (unitSystem === 'imperial') {
+            const baseInFeet = metersToFeet(baseValue);
+            const feet = Math.floor(baseInFeet); // Get the whole number of feet
+            const inches = ((baseInFeet - feet) * 12).toFixed(0); // Convert the fractional part to inches
+            baseElement.innerHTML = `<strong>Current Base:</strong> ${feet} ft ${inches} in`;
+        } else {
+            baseElement.innerHTML = `<strong>Current Base:</strong> ${baseValue} m`;
         }
 
         // Update precipitation
