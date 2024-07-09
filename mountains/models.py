@@ -15,4 +15,4 @@ class Mountain(models.Model):
   lat = models.FloatField(null=True)
   lon = models.FloatField(null=True)
   pass_type = models.CharField(max_length=10, choices=[('epic', 'Epic Pass'), ('ikon', 'Ikon Pass'), ('other', 'Other')], default='unknown')
-  
+  resort_url = models.URLField(max_length=200, blank=True)

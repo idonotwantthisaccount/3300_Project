@@ -45,6 +45,26 @@
                 .back-link a:hover {
                     text-decoration: underline; /* Underline on hover */
                 }
+
+        .url-button {
+            display: block; /* Makes each button take the full width available preventing button overlap */
+            width: 200px; /* Set a fixed width for buttons */
+            padding: 12px; /* Adds padding from the text to the edge of the button */
+            font-size: 16px; /* Button font size */
+            color: #fff; /* Makes text white */
+            background-color: #007bff; /* Create the light blue button background color */
+            border-radius: 10px; /* Rounds the corners of the buttons */
+            text-decoration: none; /* Removes the underline below button text */
+            cursor: pointer; /* Changes the cursor to a pointer to help signify the button is interactable */
+            transition: background-color 0.3s ease; /* Changes the button color that your cursor is hovering over */
+            text-align: center; /* Center aligns the text within the button */
+            margin: 10px; 
+        }
+
+        .url-button:hover {
+            background-color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -63,6 +83,8 @@
         <p><strong>Current UV Index:</strong> {{ UV }}</p>
         <p id="visibility"><strong>Current Visibility:</strong> {{ Visibility }} meters</p>
         <p id="precipitation"><strong>Current Precipitation:</strong> {{ Precipitation }} in</p>
+
+        <a href="{{resort_url}}" class="url-button">{{ resort_url }}</a>
 
         <div class="back-link">
             <p>Back to <a href="/">Mountains</a></p>
