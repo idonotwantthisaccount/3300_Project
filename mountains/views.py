@@ -44,7 +44,8 @@ def forecast(response, name):
         'Visibility': Visibility,
         'Base': Base,
         'Precipitation': Precipitation,
-        'resort_url': mymountain.resort_url
+        'resort_url': mymountain.resort_url,
+        'image_url': mymountain.image_url
     }
     
     return render(response, "mountains/forecast.html", context)
