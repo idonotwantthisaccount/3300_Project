@@ -15,6 +15,7 @@
             height: 100vh; /* Full viewport height */
         }
 
+
         .forecast-container {
             max-width: 600px; /* Adjust as needed */
             background-color: #fff; /* White background */
@@ -22,12 +23,22 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
             text-align: center; /* Center align content within container */
+	    margin: 20px; /* Spacing for each container for forecast */
+        }
+	
+        .containter-list {
+            list-style-type: none; /* Removes bullet points that appear with the buttons */
+            display: flex; /* Allows for the buttons to lay in multiple columns instead of just one column */
+            flex-wrap: wrap; /* Allows for the buttons to lay in multiple rows instead of just one row */
+            justify-content: center; /* Ensures that the columns of buttons are centered to the container */
         }
 
+	}
         h1 {
             color: #007bff; /* Blue color for the heading */
             margin-top: 0; /* Remove default margin for h1 */
         }
+        
 
         p {
             margin-bottom: 10px; /* Space between paragraphs */
@@ -35,7 +46,7 @@
 
         .back-link {
             margin-top: 20px; /* Space between content and back link */
-        }
+            }
 
             .back-link a {
                 color: #007bff; /* Blue color for the link */
@@ -47,7 +58,6 @@
                 }
 
         .url-button {
-            display: block; /* Makes each button take the full width available preventing button overlap */
             width: 200px; /* Set a fixed width for buttons */
             padding: 12px; /* Adds padding from the text to the edge of the button */
             font-size: 16px; /* Button font size */
@@ -58,7 +68,7 @@
             cursor: pointer; /* Changes the cursor to a pointer to help signify the button is interactable */
             transition: background-color 0.3s ease; /* Changes the button color that your cursor is hovering over */
             text-align: center; /* Center aligns the text within the button */
-            margin: 10px; 
+            margin: 10px;
         }
 
         .url-button:hover {
@@ -68,10 +78,10 @@
     </style>
 </head>
 <body>
-
+    <ul class="container-list">
     <div class="forecast-container">
-        <h1>{{ mymountain.name }} Forecast</h1>
-
+        <h1>{{ mymountain.name }} Forecast<br> 
+        Current:</h1>
         <label for="unit-system">Select Unit System: </label>
         <select id="unit-system" onchange="updateUnits()">
             <option value="imperial">Imperial</option>
@@ -84,12 +94,8 @@
         <p id="visibility"><strong>Current Visibility:</strong> {{ Visibility }} meters</p>
         <p id="precipitation"><strong>Current Precipitation:</strong> {{ Precipitation }} in</p>
 
-        <a href="{{resort_url}}" class="url-button">{{ resort_url }}</a>
-
-        <div class="back-link">
-            <p>Back to <a href="/">Mountains</a></p>
-        </div>
     </div>
+
 
     <script>
     // Function to convert meters to miles
@@ -181,6 +187,23 @@
         updateUnits(); // Set initial units based on the default value
     };
     </script>
+
+</body>
+    <div class="forecast-container">
+        <h1>Next 24 Hours:</h1>
+    </div>
+<body>
+
+
+</body>
+    <div class="forecast-container">
+	<h1>Plan Your Trip</h1>
+        <a href="{{resort_url}}" class="url-button">{{ resort_url }}</a>    
+        <div class="back-link">
+            <p>Back to <a href="/">Mountains</a></p>
+        </div>
+    </div>
+<body>
 
 </body>
 </html>
