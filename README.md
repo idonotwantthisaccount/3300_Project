@@ -15,7 +15,7 @@ The original data can be accessed at <https://open-meteo.com/>.
 
 # How to run our software on a Windows device
 ## 1. Open Command Prompt
-•	Press command + Spacebar, type terminal, and press Enter.
+•	Press Win + R, type cmd, and press Enter.
 
 ## 2. Navigate to Your Project Directory
 •	Use the cd command to change to the directory where your Django project is located. For example:
@@ -47,7 +47,7 @@ python manage.py runserver
 
 # How to run our software on a Mac device
 ## 1. Open Terminal
-•	Press Win + Spacebar, type terminal, and press Enter.
+•	Press command + Spacebar, type terminal, and press Enter.
 
 ## 2. Navigate to Your Project Directory
 •	Use the cd command to change to the directory where your Django project is located. For example:
