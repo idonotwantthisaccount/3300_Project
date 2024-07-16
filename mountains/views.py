@@ -22,21 +22,25 @@ def forecast(response, name):
 
     weather_url = (
         f'https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}'
-        '&current_weather=true&hourly=precipitation,visibility,snow_depth,uv_index'
-        '&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FDenver&forecast_days=1'
+        '&current=temperature_2m,precipitation&hourly=snow_depth,visibility,uv_index&daily=temperature_2m_max,precipitation_sum'
+        '&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FDenver&forecast_days=3'
     )
-    
+   
     weather_data = urllib.request.urlopen(weather_url).read()
     data_list = json.loads(weather_data)
-    
+   
     current_hour = datetime.datetime.now().hour
 
-    Temp = str(data_list['current_weather']['temperature'])
-    Precipitation = str(data_list['hourly']['precipitation'][current_hour])
+    Temp = str(data_list['current']['temperature_2m'])
+    Precipitation = str(data_list['current']['precipitation'])
     Visibility = str(data_list['hourly']['visibility'][current_hour])
     Base = str(data_list['hourly']['snow_depth'][current_hour])
     UV = str(data_list['hourly']['uv_index'][current_hour])
+
+    Temp24 = str(data_list['daily']['temperature_2m_max'][1])
+    Precip24 = str(data_list['daily']['precipitation_sum'][1])
     
+ 
     context = {
         'mymountain': mymountain,
         'Temp': Temp,
@@ -45,7 +49,9 @@ def forecast(response, name):
         'Base': Base,
         'Precipitation': Precipitation,
         'resort_url': mymountain.resort_url,
-        'background_image_url': mymountain.background_image.url if mymountain.background_image else None
-    }
-    
+        'background_image_url': mymountain.background_image.url if mymountain.background_image else None,
+        'Temp24' : Temp24,
+        'Precip24' : Precip24,
+   }
+ 
     return render(response, "mountains/forecast.html", context)
