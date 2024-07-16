@@ -1,33 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>{{ mymountain.name }} Forecast</title>
     {% load static %}
     <style>
-
         body {
             font-family: Arial, sans-serif;
+            background-size: cover; /* Ensures the background image covers the entire screen */
+            background-repeat: no-repeat;
+            background-position: center; /* Centers the background image */
+            padding: 20px;
+            margin: 50px 0px 50px 0px;
+            display: flex;
+            flex-direction: column; /* Stack containers vertically */
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+            height: 100vh; /* Full viewport height */
             {% if background_image_url %}
                 background-image: url("{{ background_image_url }}");
             {% else %}
                 background-image: url("{% static 'default_background.jpg' %}"); /* Fallback image */
             {% endif %}
-        background-size: cover; /* Ensures the background image covers the entire screen */
-        background-repeat: no-repeat;
-        background-position: center; /* Centers the background image */
-        padding: 20px;
-        display: flex;
-        justify-content: center; /* Center content horizontally */
-        align-items: center; /* Center content vertically */
-        height: 100vh; /* Full viewport height */
         }
 
-
         .forecast-container {
-            max-width: 600px; /* Adjust as needed */
+            width: 100%; /* Full width */
+            max-width: 300px; /* Maximum width for large screens */
             background-color: #fff; /* White background */
             padding: 20px;
             border-radius: 10px;
@@ -36,20 +36,10 @@
             margin: 20px; /* Spacing for each container for forecast */
         }
 
-        .containter-list {
-            list-style-type: none; /* Removes bullet points that appear with the buttons */
-            display: flex; /* Allows for the buttons to lay in multiple columns instead of just one column */
-            flex-wrap: wrap; /* Allows for the buttons to lay in multiple rows instead of just one row */
-            justify-content: center; /* Ensures that the columns of buttons are centered to the container */
-        }
-
-        }
-
         h1 {
             color: #007bff; /* Blue color for the heading */
             margin-top: 0; /* Remove default margin for h1 */
         }
-
 
         p {
             margin-bottom: 10px; /* Space between paragraphs */
@@ -59,14 +49,14 @@
             margin-top: 20px; /* Space between content and back link */
         }
 
-            .back-link a {
-                color: #007bff; /* Blue color for the link */
-                text-decoration: none; /* Remove underline */
-            }
+        .back-link a {
+            color: #007bff; /* Blue color for the link */
+            text-decoration: none; /* Remove underline */
+        }
 
-                .back-link a:hover {
-                    text-decoration: underline; /* Underline on hover */
-                }
+        .back-link a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
 
         .url-button {
             display: block;
@@ -83,16 +73,17 @@
             margin: 0 auto;
         }
 
-            .url-button:hover {
-                background-color: #0056b3;
-            }
+        .url-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <ul class="container-list">
     <div class="forecast-container">
-        <h1>{{ mymountain.name }} Forecast<br> 
-        Current:</h1>
+        <h1>
+            {{ mymountain.name }} Forecast<br>
+            Current:
+        </h1>
         <label for="unit-system">Select Unit System: </label>
         <select id="unit-system" onchange="updateUnits()">
             <option value="imperial">Imperial</option>
@@ -104,15 +95,27 @@
         <p><strong>Current UV Index:</strong> {{ UV }}</p>
         <p id="visibility"><strong>Current Visibility:</strong> {{ Visibility }} meters</p>
         <p id="precipitation"><strong>Current Precipitation:</strong> {{ Precipitation }} in</p>
-
     </div>
 
+    <div class="forecast-container">
+        <h1>Next 24 Hours:</h1>
+        <p id="temp24"><strong> Temperature:</strong> {{ Temp24 }} F</p>
+        <p id="precip24"><strong> Total Precipitation:</strong> {{ Precip24 }} in</p>
+    </div>
+
+    <div class="forecast-container">
+        <h1>Plan Your Trip</h1>
+        <a href="{{ resort_url }}" class="url-button">{{ mymountain.name }} Website</a>
+        <div class="back-link">
+            <p>Back to <a href="/">Mountains</a></p>
+        </div>
+    </div>
 
     <script>
     // Function to convert meters to miles
     function metersToMiles(meters) {
         return (meters * 0.000621371).toFixed(2); // Convert meters to miles and round to 2 decimal places
-        }
+    }
 
     // Function to convert meters to kilometers
     function metersToKm(meters) {
@@ -134,7 +137,6 @@
         return (feet * 0.3048).toFixed(2); // Convert feet to meters and round to 2 decimal places
     }
 
-
     // Function to convert inches to millimeters
     function inchesToMillimeters(inches) {
         return (inches * 25.4).toFixed(2); // Convert inches to millimeters and round to 2 decimal places
@@ -153,8 +155,8 @@
         const baseElement = document.getElementById('base');
         const precipitationElement = document.getElementById('precipitation');
         const temp24Element = document.getElementById('temp24');
-        const precip24Element = document.getElementById('precip24');          
-        
+        const precip24Element = document.getElementById('precip24');
+
         // Update visibility
         const visibilityValue = parseFloat('{{ Visibility }}');
         if (unitSystem === 'imperial') {
@@ -194,23 +196,23 @@
         } else {
             precipitationElement.innerHTML = `<strong>Current Precipitation:</strong> ${precipitationValue} in`;
         }
-        
-	// Update temperature
+
+        // Update 24-hour temperature
         const getFahrenheit24 = parseFloat('{{ Temp24 }}'.replace('F', '')); // Remove the 'F' and convert to number
         if (unitSystem === 'metric') {
             const tempInCelsius24 = fahrenheitToCelsius(getFahrenheit24); // Convert temp from Fahrenheit to Celsius
-            temp24Element.innerHTML = `<strong> High Temperature:</strong> ${tempInCelsius24} C`;
+            temp24Element.innerHTML = `<strong>High Temperature:</strong> ${tempInCelsius24} C`;
         } else {
-            temp24Element.innerHTML = `<strong> High Temperature:</strong> ${getFahrenheit24} F`;
+            temp24Element.innerHTML = `<strong>High Temperature:</strong> ${getFahrenheit24} F`;
         }
 
-        // Update precipitation
+        // Update 24-hour precipitation
         const precipitationValue24 = parseFloat('{{ Precip24 }}');
         if (unitSystem === 'metric') {
             const precipitationInMillimeters24 = inchesToMillimeters(precipitationValue24); // Convert precipitation from inches to millimeters
-            precip24Element.innerHTML = `<strong> Total Precipitation:</strong> ${precipitationInMillimeters24} mm`;
+            precip24Element.innerHTML = `<strong>Total Precipitation:</strong> ${precipitationInMillimeters24} mm`;
         } else {
-            precip24Element.innerHTML = `<strong> Total Precipitation:</strong> ${precipitationValue24} in`;
+            precip24Element.innerHTML = `<strong>Total Precipitation:</strong> ${precipitationValue24} in`;
         }
     }
 
@@ -218,27 +220,5 @@
         updateUnits(); // Set initial units based on the default value
     };
     </script>
-
-</body>
-    <div class="forecast-container">
-        <h1>Next 24 Hours:</h1>
-    <p id="temp24"><strong> Temperature:</strong> {{ Temp24 }} F</p>
-    <p id="precip24" {{ Precip24 }} in</p>
-    <script>
-
-    </script>
-    </div>
-<body>
-
-</body>
-    <div class="forecast-container">
-	<h1>Plan Your Trip</h1>
-        <a href="{{resort_url}}" class="url-button">{{ resort_url }}</a>    
-        <div class="back-link">
-            <p>Back to <a href="/">Mountains</a></p>
-        </div>
-    </div>
-<body>
-
 </body>
 </html>
