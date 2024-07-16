@@ -6,6 +6,8 @@
 # This project uses weather data from Open-Meteo (<https://open-meteo.com/>),
 # licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
 # You can view the license at <https://creativecommons.org/licenses/by/4.0/>.
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from . import views
 
@@ -13,3 +15,7 @@ urlpatterns = [
     path("", views.mountains, name='mountains'),
     path('forecast/<str:name>', views.forecast, name='forecast'),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

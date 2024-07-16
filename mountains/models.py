@@ -16,4 +16,4 @@ class Mountain(models.Model):
   lon = models.FloatField(null=True)
   pass_type = models.CharField(max_length=10, choices=[('epic', 'Epic Pass'), ('ikon', 'Ikon Pass'), ('other', 'Other')], default='unknown')
   resort_url = models.URLField(max_length=200, blank=True)
-  image_url = models.URLField(max_length=200, blank=True)
+  background_image = models.ImageField(upload_to='backgrounds/', blank=True, null=True)

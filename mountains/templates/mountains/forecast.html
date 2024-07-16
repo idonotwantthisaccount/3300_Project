@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{{ mymountain.name }} Forecast</title>
+    {% load static %}
     <style>
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #87CEEB; /* Light blue background */
-            padding: 20px;
-            display: flex;
-            justify-content: center; /* Center content horizontally */
-            align-items: center; /* Center content vertically */
-            height: 100vh; /* Full viewport height */
+            {% if background_image_url %}
+                background-image: url("{{ background_image_url }}");
+            {% else %}
+                background-image: url("{% static 'default_background.jpg' %}"); /* Fallback image */
+            {% endif %}
+        background-size: cover; /* Ensures the background image covers the entire screen */
+        background-repeat: no-repeat;
+        background-position: center; /* Centers the background image */
+        padding: 20px;
+        display: flex;
+        justify-content: center; /* Center content horizontally */
+        align-items: center; /* Center content vertically */
+        height: 100vh; /* Full viewport height */
         }
 
 
@@ -23,9 +33,9 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
             text-align: center; /* Center align content within container */
-	    margin: 20px; /* Spacing for each container for forecast */
+            margin: 20px; /* Spacing for each container for forecast */
         }
-	
+
         .containter-list {
             list-style-type: none; /* Removes bullet points that appear with the buttons */
             display: flex; /* Allows for the buttons to lay in multiple columns instead of just one column */
@@ -33,12 +43,13 @@
             justify-content: center; /* Ensures that the columns of buttons are centered to the container */
         }
 
-	}
+        }
+
         h1 {
             color: #007bff; /* Blue color for the heading */
             margin-top: 0; /* Remove default margin for h1 */
         }
-        
+
 
         p {
             margin-bottom: 10px; /* Space between paragraphs */
@@ -46,7 +57,7 @@
 
         .back-link {
             margin-top: 20px; /* Space between content and back link */
-            }
+        }
 
             .back-link a {
                 color: #007bff; /* Blue color for the link */
@@ -58,6 +69,7 @@
                 }
 
         .url-button {
+            display: block;
             width: 200px; /* Set a fixed width for buttons */
             padding: 12px; /* Adds padding from the text to the edge of the button */
             font-size: 16px; /* Button font size */
@@ -68,13 +80,12 @@
             cursor: pointer; /* Changes the cursor to a pointer to help signify the button is interactable */
             transition: background-color 0.3s ease; /* Changes the button color that your cursor is hovering over */
             text-align: center; /* Center aligns the text within the button */
-            margin: 10px;
+            margin: 0 auto;
         }
 
-        .url-button:hover {
-            background-color: #0056b3;
-        }
-
+            .url-button:hover {
+                background-color: #0056b3;
+            }
     </style>
 </head>
 <body>
