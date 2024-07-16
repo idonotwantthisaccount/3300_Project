@@ -152,7 +152,9 @@
         const tempElement = document.getElementById('temperature');
         const baseElement = document.getElementById('base');
         const precipitationElement = document.getElementById('precipitation');
-
+        const temp24Element = document.getElementById('temp24');
+        const precip24Element = document.getElementById('precip24');          
+        
         // Update visibility
         const visibilityValue = parseFloat('{{ Visibility }}');
         if (unitSystem === 'imperial') {
@@ -192,6 +194,24 @@
         } else {
             precipitationElement.innerHTML = `<strong>Current Precipitation:</strong> ${precipitationValue} in`;
         }
+        
+	// Update temperature
+        const getFahrenheit24 = parseFloat('{{ Temp24 }}'.replace('F', '')); // Remove the 'F' and convert to number
+        if (unitSystem === 'metric') {
+            const tempInCelsius24 = fahrenheitToCelsius(getFahrenheit24); // Convert temp from Fahrenheit to Celsius
+            temp24Element.innerHTML = `<strong>Current Temperature:</strong> ${tempInCelsius24} C`;
+        } else {
+            temp24Element.innerHTML = `<strong>Current Temperature:</strong> ${getFahrenheit24} F`;
+        }
+
+        // Update precipitation
+        const precipitationValue24 = parseFloat('{{ Precip24 }}');
+        if (unitSystem === 'metric') {
+            const precipitationInMillimeters24 = inchesToMillimeters(precipitationValue24); // Convert precipitation from inches to millimeters
+            precip24Element.innerHTML = `<strong>Current Precipitation:</strong> ${precipitationInMillimeters24} mm`;
+        } else {
+            precip24Element.innerHTML = `<strong>Current Precipitation:</strong> ${precipitationValue24} in`;
+        }
     }
 
     window.onload = function() {
@@ -202,8 +222,8 @@
 </body>
     <div class="forecast-container">
         <h1>Next 24 Hours:</h1>
-    <p id="temperature"><strong>Tomorrow's Temperature:</strong> {{ Temp24 }} F</p>
-    <p id="precipitation"><strong>Tomorrow's Precipitation:</strong> {{ Precip24 }} in</p>
+    <p id="temp24"><strong>Tomorrow's Temperature:</strong> {{ Temp24 }} F</p>
+    <p id="precip24"><strong>Tomorrow's Precipitation:</strong> {{ Precip24 }} in</p>
     <script>
 
     </script>
