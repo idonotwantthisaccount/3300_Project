@@ -14,9 +14,9 @@
             padding: 20px;
             margin: 50px 0px 50px 0px;
             display: flex;
-            flex-direction: column; /* Stack containers vertically */
-            justify-content: center; /* Center content horizontally */
-            align-items: center; /* Center content vertically */
+            flex-direction: column; /* Stacks the containers vertically */
+            justify-content: center; /* Centers the containers horizontally */
+            align-items: center; /* Centers the containers vertically */
             height: 100vh; /* Full viewport height */
             {% if background_image_url %}
                 background-image: url("{{ background_image_url }}");
@@ -26,14 +26,14 @@
         }
 
         .forecast-container {
-            width: 100%; /* Full width */
-            max-width: 300px; /* Maximum width for large screens */
+            width: 100%; /* Takes up the full width allowed */
+            max-width: 300px; /* Maximum width allowed */
             background-color: #fff; /* White background */
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow effect */
-            text-align: center; /* Center align content within container */
-            margin: 20px; /* Spacing for each container for forecast */
+            padding: 20px; /* Adds padding inside of container */
+            border-radius: 10px; /* Rounds the container*/
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Adds a shadow effect */
+            text-align: center; /* Center aligns the content within container */
+            margin: 20px; /* Gives spacing for each container for forecast */
         }
 
         h1 {
@@ -42,11 +42,11 @@
         }
 
         p {
-            margin-bottom: 10px; /* Space between paragraphs */
+            margin-bottom: 10px; /* Adds space between paragraphs */
         }
 
         .back-link {
-            margin-top: 20px; /* Space between content and back link */
+            margin-top: 20px; /* Adds space between content and back link */
         }
 
         .back-link a {
@@ -70,11 +70,11 @@
             cursor: pointer; /* Changes the cursor to a pointer to help signify the button is interactable */
             transition: background-color 0.3s ease; /* Changes the button color that your cursor is hovering over */
             text-align: center; /* Center aligns the text within the button */
-            margin: 0 auto;
+            margin: 0 auto; /* Centers button in container */
         }
 
         .url-button:hover {
-            background-color: #0056b3;
+            background-color: #0056b3; /* Darker color to show hover affect */
         }
     </style>
 </head>
@@ -158,7 +158,7 @@
         const precip24Element = document.getElementById('precip24');
 
         // Update visibility
-        const visibilityValue = parseFloat('{{ Visibility }}');
+        const visibilityValue = parseFloat('{{ Visibility }}'); // Convert text to number
         if (unitSystem === 'imperial') {
             const visibilityInMiles = metersToMiles(visibilityValue); // Convert visibility from meters to miles
             visibilityElement.innerHTML = `<strong>Current Visibility:</strong> ${visibilityInMiles} miles`;
@@ -169,7 +169,7 @@
         }
 
         // Update temperature
-        const getFahrenheit = parseFloat('{{ Temp }}'.replace('F', '')); // Remove the 'F' and convert to number
+        const getFahrenheit = parseFloat('{{ Temp }}'); // Convert text to number
         if (unitSystem === 'metric') {
             const tempInCelsius = fahrenheitToCelsius(getFahrenheit); // Convert temp from Fahrenheit to Celsius
             tempElement.innerHTML = `<strong>Current Temperature:</strong> ${tempInCelsius} C`;
@@ -178,7 +178,7 @@
         }
 
         // Update base
-        const baseValue = parseFloat('{{ Base }}');
+        const baseValue = parseFloat('{{ Base }}'); // Convert text to number
         if (unitSystem === 'imperial') {
             const baseInFeet = metersToFeet(baseValue);
             const feet = Math.floor(baseInFeet); // Get the whole number of feet
@@ -189,7 +189,7 @@
         }
 
         // Update precipitation
-        const precipitationValue = parseFloat('{{ Precipitation }}');
+        const precipitationValue = parseFloat('{{ Precipitation }}'); // Convert text to number
         if (unitSystem === 'metric') {
             const precipitationInMillimeters = inchesToMillimeters(precipitationValue); // Convert precipitation from inches to millimeters
             precipitationElement.innerHTML = `<strong>Current Precipitation:</strong> ${precipitationInMillimeters} mm`;
@@ -198,7 +198,7 @@
         }
 
         // Update 24-hour temperature
-        const getFahrenheit24 = parseFloat('{{ Temp24 }}'.replace('F', '')); // Remove the 'F' and convert to number
+        const getFahrenheit24 = parseFloat('{{ Temp24 }}'); // Convert text to number
         if (unitSystem === 'metric') {
             const tempInCelsius24 = fahrenheitToCelsius(getFahrenheit24); // Convert temp from Fahrenheit to Celsius
             temp24Element.innerHTML = `<strong>High Temperature:</strong> ${tempInCelsius24} C`;
@@ -207,7 +207,7 @@
         }
 
         // Update 24-hour precipitation
-        const precipitationValue24 = parseFloat('{{ Precip24 }}');
+        const precipitationValue24 = parseFloat('{{ Precip24 }}'); // Convert text to number
         if (unitSystem === 'metric') {
             const precipitationInMillimeters24 = inchesToMillimeters(precipitationValue24); // Convert precipitation from inches to millimeters
             precip24Element.innerHTML = `<strong>Total Precipitation:</strong> ${precipitationInMillimeters24} mm`;
