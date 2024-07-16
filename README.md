@@ -37,12 +37,17 @@ python -m venv env
 
 pip install django
 
-## 6. Run the Django Development Server
+## 6. Install Pillow
+•	If Pillow is not already installed in your virtual environment, install it with:
+
+pip install Pillow
+
+## 7. Run the Django Development Server
 •	Start the Django development server with:
 
 python manage.py runserver
 
-## 7. Go to the Given URL
+## 8. Go to the Given URL
 •	Should be http://localhost:8000/ or similar. 
 
 # How to run our software on a Mac device
