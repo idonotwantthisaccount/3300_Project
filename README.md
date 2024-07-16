@@ -15,7 +15,7 @@ The original data can be accessed at <https://open-meteo.com/>.
 
 # How to run our software on a Windows device
 ## 1. Open Command Prompt
-•	Press Win + R, type cmd, and press Enter.
+•	Press Win + Spacebar, type terminal, and press Enter.
 
 ## 2. Navigate to Your Project Directory
 •	Use the cd command to change to the directory where your Django project is located. For example:
@@ -44,3 +44,36 @@ python manage.py runserver
 
 ## 7. Go to the Given URL
 •	Should be http://localhost:8000/ or similar. 
+
+# How to run our software on a Mac device
+## 1. Open Terminal
+•	Press Win + Spacebar, type terminal, and press Enter.
+
+## 2. Navigate to Your Project Directory
+•	Use the cd command to change to the directory where your Django project is located. For example:
+
+cd path\to\your\project
+
+## 3. Create a Virtual Environment
+•	If you haven't already created a virtual environment, you can do so with the following command (replace “env” with whatever you wish to name your environment):
+
+python3 -m venv env
+
+## 4. Activate the Virtual Environment
+•	Activate the virtual environment with the following command:
+
+source venv/bin/activate
+
+## 5. Install Django
+•	If Django is not already installed in your virtual environment, install it with:
+
+pip3 install django
+
+## 6. Run the Django Development Server
+•	Start the Django development server with:
+
+python3 manage.py runserver
+
+## 7. Go to the Given URL
+•	Should be http://localhost:8000/ or similar. 
+
