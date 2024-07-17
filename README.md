@@ -47,7 +47,7 @@ python3 -m venv env
 ## 5. Install the Necessary Tools
 •	Run this command to ensure that you have both Django and Pillow installed on your device:
 
-pip install -r install.txt
+pip3 install -r requirements.txt
 
 ## 6. Run the Django Development Server
 •	Start the Django development server with:
@@ -79,7 +79,7 @@ source venv/bin/activate
 ## 5. Install the Necessary Tools
 •	Run this command to ensure that you have both Django and Pillow installed on your device:
 
-pip install -r install.txt
+pip3 install -r requirements.txt
 
 ## 6. Run the Django Development Server
 •	Start the Django development server with:
