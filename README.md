@@ -9,7 +9,7 @@ The code in this project is licensed under the GNU Affero General Public License
 ## Data Attribution
 This project uses weather data from Open-Meteo (<https://open-meteo.com/>), licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). You can view the license at <https://creativecommons.org/licenses/by/4.0/>. 
 
-Adaptations to the data were made as follows: [describe any modifications made, if applicable].
+Adaptations to the data were made as follows: Data brought in from the API is converted as part of our user interface. This is so we can have values displayed in metric and imperial units. The changes are made to the variables for temperature, visibility, precipitation, and snow depth. 
 
 The original data can be accessed at <https://open-meteo.com/>.
 
