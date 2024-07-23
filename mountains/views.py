@@ -19,17 +19,19 @@ def forecast(response, name):
     mymountain = Mountain.objects.get(name=name)
     lat = mymountain.lat
     lon = mymountain.lon
-
+ 
     weather_url = (
         f'https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}'
         '&current=temperature_2m,precipitation&hourly=snow_depth,visibility,uv_index&daily=temperature_2m_max,precipitation_sum'
         '&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FDenver&forecast_days=3'
     )
-   
-    weather_data = urllib.request.urlopen(weather_url).read()
-    data_list = json.loads(weather_data)
-   
-    current_hour = datetime.datetime.now().hour
+    try:   
+        weather_data = urllib.request.urlopen(weather_url).read()
+        data_list = json.loads(weather_data)
+        current_hour = datetime.datetime.now().hour
+    except:
+        print("Error accessing API")
+        quit()
 
     Temp = str(data_list['current']['temperature_2m'])
     Precipitation = str(data_list['current']['precipitation'])
